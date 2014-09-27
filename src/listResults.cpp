@@ -4,7 +4,10 @@ ListResults::ListResults(){
     this->last=NULL;
     this->lenght=0;
 }
-
+ListResults::~ListResults(){
+    while(!this->isEmpty())
+        this->pop();
+}
 bool ListResults::isEmpty(){
     if(this->lenght == 0){
         return true;
