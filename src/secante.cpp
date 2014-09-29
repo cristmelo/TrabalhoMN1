@@ -143,7 +143,7 @@ void Secante::showProcess(){
 	while(!list.isEmpty()){
 		// cout << "loop\n";
 		interation = list.pop();
-		cout << "Interação: " << interation[0];
+		cout << "Iteração: " << interation[0];
 		cout << "    X" << interation[0]- 1 << ": " << interation[1];
 		cout << "    X" << interation[0] << ": " << interation[2];
 		cout << "    F(X" << interation[0] - 1<<  "): " << interation[3];
