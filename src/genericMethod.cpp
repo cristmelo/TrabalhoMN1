@@ -2,23 +2,54 @@
 
 
 GenericMethod::GenericMethod(double aproximacaoInicial, double a, double E1, double E2) {
-	this->
+	this->X1 = aproximacaoInicial;
 	this->a = a;
-	double E1;
-	double E2;
+	this->E1 = E1;
+	this->E2 = E2;
+	this->iterationsNumber = 0;
+	this->allResults = new ListResults();
 }
 
-GenericMethod::init(){
-	this->iterationsNumber = 0;
-	double *iterationResults
-	ListResults *allResults
+double GenericMethod::function1(double x){
 
+	return cos(x)+(1 - this->a);
+}
+
+virtual double GenericMethod::function2(double x){
+
+	return -sin(x);
+}
+
+virtual bool GenericMethod::testeParadaE1(){
+	
+	return (abs(this->function(this->X1)) < this->E1);
 }
 
 virtual bool GenericMethod::testeParadaE2(){
+
 	return abs((this->X2) - (this->X1)) >= this->E2;
+}
+
+virtual void setNovaIteracao(){
+	this->iterationResults = new double[5];
+	this->iterationResults[0] = this->iterationsNumber;
+	this->iterationResults[1] = this->X1;
+	this->iterationResults[2] = this->function1(this->X1)
+	this->iterationResults[3] = this->function2(this->X1)
+	this->iterationResults[4] = this->X2;
+}
+
+//TODO:Terminar
+virtual void GenericMethod::loop(){
+	setNovaIteracao();
+	testeParadaE1();
+	testeParadaE2();
+	salvaEmLista();
 
 }
+
+
+//-----Getters and Setters
 
 
 int GenericMethod::getIterationsNumber(){

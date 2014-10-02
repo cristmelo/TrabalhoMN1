@@ -2,9 +2,10 @@ class GenericMethod {
 public:
 	GenericMethod(double aproximacaoInicial, double a, double E1, double E2);
 
-	virtual void init();
+	double function1(double x);
+	virtual double function2(double x);
 	virtual bool testeParadaE1();
-	bool testeParadaE2();
+	virtual bool testeParadaE2();
 	virtual void setNovaIteracao();
 	virtual void salvaEmLista();
 	virtual void loop();
