@@ -30,7 +30,12 @@ virtual bool GenericMethod::testeParadaE2(){
 	return abs((this->X2) - (this->X1)) >= this->E2;
 }
 
-virtual void setNovaIteracao(){
+virtual void GenericMethod::calcularXK() {
+
+	(this->X2) = (this->X1) - (this->function1(this->X1))/(this->function2(this->X1));
+}
+
+virtual void GenericMethod::setNovaIteracao(){
 	this->iterationResults = new double[5];
 	this->iterationResults[0] = this->iterationsNumber;
 	this->iterationResults[1] = this->X1;
