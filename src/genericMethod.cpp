@@ -22,17 +22,17 @@ virtual double GenericMethod::function2(double x){
 
 virtual bool GenericMethod::testeParadaE1(){
 	
-	return (abs(this->function(this->X1)) < this->E1);
+	return (abs(function1(X1)) < E1);
 }
 
 virtual bool GenericMethod::testeParadaE2(){
 
-	return abs((this->X2) - (this->X1)) >= this->E2;
+	return (abs(X2 - X1) >= E2);
 }
 
 virtual void GenericMethod::calcularXK() {
 
-	(this->X2) = (this->X1) - (this->function1(this->X1))/(this->function2(this->X1));
+	X2 = X1 - function1(X1)/function2(X1);
 }
 
 virtual void GenericMethod::setNovaIteracao(){
@@ -81,42 +81,42 @@ void GenericMethod::show(){
 
 int GenericMethod::getIterationsNumber(){
 
-	return this->iterationsNumber;
+	return iterationsNumber;
 }
 
 double GenericMethod::getX1(){
 
-	return this->X1;
+	return X1;
 }
 
 double GenericMethod::getX2(){
 
-	return this->X2;
+	return X2;
 }
 
 double GenericMethod::getA(){
 
-	return this->a;
+	return a;
 }
 
 double GenericMethod::getE1(){
 
-	return this->E1;
+	return E1;
 }
 
 double GenericMethod::getE2(){
 
-	return this->E2;
+	return E2;
 }
 
 double GenericMethod::getIterationResults(){
 
-	return (*this->iterationResults);
+	return *iterationResults;
 }
 
 ListResults GenericMethod::getAllResults(){
 
-	return (*this->allResults);
+	return *this->allResults;
 }
 
 void GenericMethod::setIterationsNumber(int iterNumber){
