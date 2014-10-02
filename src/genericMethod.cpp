@@ -11,6 +11,16 @@ GenericMethod::GenericMethod(double aproximacaoInicial, double a, double E1, dou
 	this->allResults = new ListResults();
 }
 
+virtual void GenericMethod::loop() {
+
+	X2 = X1;
+	do{
+		X1 = X2;
+		calcularXK();
+		salvaEmLista();
+	}while(testeParadaE2())
+}
+
 double GenericMethod::function1(double x) {
 
 	return cos(x)+(1 - this->a);
@@ -46,17 +56,6 @@ virtual void GenericMethod::salvaEmLista() {
 	this->iterationResults[4] = this->X2;
 	this->iterationsNumber++;
 	allResults->push(this->iterationResults);
-}
-
-//TODO:Terminar
-virtual void GenericMethod::loop() {
-
-	X2 = X1;
-	do{
-		X1 = X2;
-		calcularXK();
-		salvaEmLista();
-	}while(testeParadaE2())
 }
 
 void GenericMethod::show() {
@@ -120,9 +119,9 @@ ListResults GenericMethod::getAllResults() {
 	return *this->allResults;
 }
 
-void GenericMethod::setIterationsNumber(int iterNumber) {
+void GenericMethod::setIterationsNumber(int iterationsNumber) {
 
-	iterationsNumber = iterNumber;
+	this->iterationsNumber = iterationsNumber;
 }
 
 void GenericMethod::setX1(double X1) {

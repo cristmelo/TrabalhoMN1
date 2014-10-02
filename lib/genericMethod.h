@@ -1,5 +1,7 @@
 class GenericMethod {
+
 public:
+
 	GenericMethod(double aproximacaoInicial, double a, double E1, double E2);
 
 	double function1(double x);
@@ -32,6 +34,7 @@ public:
 	void setE2(double E2);
 
 private:
+
 	int iterationsNumber;
 	double X1;
 	double X2;
