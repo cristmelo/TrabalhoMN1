@@ -6,7 +6,6 @@ public:
 	virtual double function2(double x);
 	virtual bool testeParadaE1();
 	virtual bool testeParadaE2();
-	virtual void setNovaIteracao();
 	virtual void calcularXK() = 0;
 	virtual void salvaEmLista();
 	virtual void loop();

@@ -2,6 +2,7 @@
 
 
 GenericMethod::GenericMethod(double aproximacaoInicial, double a, double E1, double E2) {
+
 	this->X1 = aproximacaoInicial;
 	this->a = a;
 	this->E1 = E1;
@@ -10,22 +11,22 @@ GenericMethod::GenericMethod(double aproximacaoInicial, double a, double E1, dou
 	this->allResults = new ListResults();
 }
 
-double GenericMethod::function1(double x){
+double GenericMethod::function1(double x) {
 
 	return cos(x)+(1 - this->a);
 }
 
-virtual double GenericMethod::function2(double x){
+virtual double GenericMethod::function2(double x) {
 
 	return -sin(x);
 }
 
-virtual bool GenericMethod::testeParadaE1(){
+virtual bool GenericMethod::testeParadaE1() {
 	
 	return (abs(function1(X1)) < E1);
 }
 
-virtual bool GenericMethod::testeParadaE2(){
+virtual bool GenericMethod::testeParadaE2() {
 
 	return (abs(X2 - X1) >= E2);
 }
@@ -35,11 +36,8 @@ virtual void GenericMethod::calcularXK() {
 	X2 = X1 - function1(X1)/function2(X1);
 }
 
-virtual void GenericMethod::setNovaIteracao(){
+virtual void GenericMethod::salvaEmLista() {
 
-}
-
-virtual void GenericMethod::salvaEmLista(){
 	this->iterationResults = new double[5];
 	this->iterationResults[0] = this->iterationsNumber;
 	this->iterationResults[1] = this->X1;
@@ -51,15 +49,17 @@ virtual void GenericMethod::salvaEmLista(){
 }
 
 //TODO:Terminar
-virtual void GenericMethod::loop(){
-	setNovaIteracao();
-	testeParadaE1();
-	testeParadaE2();
-	salvaEmLista();
+virtual void GenericMethod::loop() {
 
+	do{
+		X2 = X1;
+		calcularXK();
+		salvaEmLista();
+	}while(testeParadaE2())
 }
 
-void GenericMethod::show(){
+void GenericMethod::show() {
+
 	ListResults list = (*this->allResults);
 	double *interation;
 	while(!list.isEmpty()){
@@ -79,72 +79,72 @@ void GenericMethod::show(){
 //-----Getters and Setters
 
 
-int GenericMethod::getIterationsNumber(){
+int GenericMethod::getIterationsNumber() {
 
 	return iterationsNumber;
 }
 
-double GenericMethod::getX1(){
+double GenericMethod::getX1() {
 
 	return X1;
 }
 
-double GenericMethod::getX2(){
+double GenericMethod::getX2() {
 
 	return X2;
 }
 
-double GenericMethod::getA(){
+double GenericMethod::getA() {
 
 	return a;
 }
 
-double GenericMethod::getE1(){
+double GenericMethod::getE1() {
 
 	return E1;
 }
 
-double GenericMethod::getE2(){
+double GenericMethod::getE2() {
 
 	return E2;
 }
 
-double GenericMethod::getIterationResults(){
+double GenericMethod::getIterationResults() {
 
 	return *iterationResults;
 }
 
-ListResults GenericMethod::getAllResults(){
+ListResults GenericMethod::getAllResults() {
 
 	return *this->allResults;
 }
 
-void GenericMethod::setIterationsNumber(int iterNumber){
+void GenericMethod::setIterationsNumber(int iterNumber) {
 
 	iterationsNumber = iterNumber;
 }
 
-void GenericMethod::setX1(double X1){
+void GenericMethod::setX1(double X1) {
 
 	this->X1 = X1;
 }
 
-void GenericMethod::setX2(double X2){
+void GenericMethod::setX2(double X2) {
 
 	this->X2 = X2;
 }
 
-void GenericMethod::setA(double A){
+void GenericMethod::setA(double A) {
 
 	this->A = A;
 }
 
-void GenericMethod::setE1(double E1){
+void GenericMethod::setE1(double E1) {
 
 	this->E1 = E1;
 }
 
-void GenericMethod::setE2(double E2){
+void GenericMethod::setE2(double E2) {
 
 	this->E2 = E2;
 }
