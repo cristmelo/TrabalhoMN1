@@ -2,24 +2,29 @@ class GenericMethod {
 public:
 	GenericMethod(double aproximacaoInicial, double a, double E1, double E2);
 
-	void init();
-	bool testeParadaE1();
+	virtual void init();
+	virtual bool testeParadaE1();
 	bool testeParadaE2();
-	void setNovaIteracao();
-	void salvaEmLista();
-	void loop();
-	void show();
+	virtual void setNovaIteracao();
+	virtual void salvaEmLista();
+	virtual void loop();
+	virtual void show();
 
 
 //-----Getters and Setters
 
 	int getIterationsNumber();
+
+	double getX1();
+	double getX2();
 	double getA();
 	double getE1();
 	double getE2();
 	double getIterationResults();
 	ListResults getAllResults();
 
+	void setX1();
+	void setX2();
 	void setIterationsNumber(int iterNumber);
 	void setA(double a);
 	void setE1(double E1);
@@ -27,6 +32,8 @@ public:
 
 private:
 	int iterationsNumber;
+	double X1;
+	double X2;
 	double a;
 	double E1;
 	double E2;
