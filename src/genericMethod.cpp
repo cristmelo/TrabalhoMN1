@@ -1,9 +1,10 @@
 #include "../lib/imports.h"
 
 
-GenericMethod::GenericMethod {
+GenericMethod::GenericMethod(double aproximacaoInicial, double a, double E1, double E2) {
 
 }
+
 
 int GenericMethod::getIterationsNumber(){
 	return this->iterationsNumber;
@@ -21,6 +22,15 @@ double GenericMethod::getE2(){
 	return this->E2;
 }
 
+double GenericMethod::getIterationResults(){
+	return (*this->iterationResults);
+}
+
+ListResults GenericMethod::getAllResults(){
+	return (*this->allResults);
+}
+
+
 void GenericMethod::setIterationsNumber(int iterNumber){
 	iterationsNumber = iterNumber;
 }
@@ -36,5 +46,3 @@ void GenericMethod::setE1(double E1){
 void GenericMethod::setE2(double E2){
 	this->E2 = E2;
 }
-
-double Ge

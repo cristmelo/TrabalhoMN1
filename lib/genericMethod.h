@@ -17,6 +17,8 @@ public:
 	double getA();
 	double getE1();
 	double getE2();
+	double getIterationResults();
+	ListResults getAllResults();
 
 	void setIterationsNumber(int iterNumber);
 	void setA(double a);
