@@ -10,7 +10,7 @@ public:
 	virtual void calcularXK() = 0;
 	virtual void salvaEmLista();
 	virtual void loop();
-	virtual void show();
+	void show();
 
 
 //-----Getters and Setters

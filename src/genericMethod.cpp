@@ -36,12 +36,18 @@ virtual void GenericMethod::calcularXK() {
 }
 
 virtual void GenericMethod::setNovaIteracao(){
+
+}
+
+virtual void GenericMethod::salvaEmLista(){
 	this->iterationResults = new double[5];
 	this->iterationResults[0] = this->iterationsNumber;
 	this->iterationResults[1] = this->X1;
 	this->iterationResults[2] = this->function1(this->X1)
 	this->iterationResults[3] = this->function2(this->X1)
 	this->iterationResults[4] = this->X2;
+	this->iterationsNumber++;
+	allResults->push(this->iterationResults);
 }
 
 //TODO:Terminar
@@ -51,6 +57,22 @@ virtual void GenericMethod::loop(){
 	testeParadaE2();
 	salvaEmLista();
 
+}
+
+void GenericMethod::show(){
+	ListResults list = (*this->allResults);
+	double *interation;
+	while(!list.isEmpty()){
+		// cout << "loop\n";
+		interation = list.pop();
+		cout << "Iteração: " << interation[0];
+		cout << "    X" << interation[0]- 1 << ": " << interation[1];
+		cout << "    X" << interation[0] << ": " << interation[2];
+		cout << "    F(X" << interation[0] - 1<<  "): " << interation[3];
+		cout << "    F(X" << interation[0] << "): " << interation[4];
+		cout << "    X" << interation[0] + 1 << ": " << interation[5] << endl;
+	}
+	cout << "Valor obtido: " << this->value << endl;
 }
 
 
