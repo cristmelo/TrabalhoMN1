@@ -51,8 +51,9 @@ virtual void GenericMethod::salvaEmLista() {
 //TODO:Terminar
 virtual void GenericMethod::loop() {
 
+	X2 = X1;
 	do{
-		X2 = X1;
+		X1 = X2;
 		calcularXK();
 		salvaEmLista();
 	}while(testeParadaE2())

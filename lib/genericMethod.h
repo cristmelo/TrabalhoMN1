@@ -38,6 +38,6 @@ private:
 	double a;
 	double E1;
 	double E2;
-	double *iterationResults
-	ListResults *allResults
-}
+	double *iterationResults;
+	ListResults *allResults;
+};
