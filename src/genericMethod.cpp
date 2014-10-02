@@ -2,25 +2,21 @@
 
 
 GenericMethod::GenericMethod(double aproximacaoInicial, double a, double E1, double E2) {
-	this->a = ;
+	this->
+	this->a = a;
 	double E1;
 	double E2;
-	double *iterationResults
-	ListResults *allResults
 }
 
 GenericMethod::init(){
 	this->iterationsNumber = 0;
-	this->a = ;
-	double E1;
-	double E2;
 	double *iterationResults
 	ListResults *allResults
 
 }
 
-bool GenericMethod::testeParadaE2(){
-
+virtual bool GenericMethod::testeParadaE2(){
+	return abs((this->X2) - (this->X1)) >= this->E2;
 
 }
 
