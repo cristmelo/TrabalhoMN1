@@ -5,7 +5,13 @@ GenericMethod::GenericMethod {
 
 }
 
+int GenericMethod::getIterationsNumber(){
+	return this->iterationsNumber;
+}
 
+double GenericMethod::getA(){
+	return this->a;
+}
 
 double GenericMethod::getE1(){
 	return this->E1;
@@ -13,6 +19,14 @@ double GenericMethod::getE1(){
 
 double GenericMethod::getE2(){
 	return this->E2;
+}
+
+void GenericMethod::setIterationsNumber(int iterNumber){
+	iterationsNumber = iterNumber;
+}
+
+void GenericMethod::setA(double A){
+	this->A = A;
 }
 
 void GenericMethod::setE1(double E1){

@@ -18,14 +18,14 @@ public:
 	double getE1();
 	double getE2();
 
-	void setIterationsNumber(int intNumber);
-	void setA(double A);
+	void setIterationsNumber(int iterNumber);
+	void setA(double a);
 	void setE1(double E1);
 	void setE2(double E2);
 
 private:
 	int iterationsNumber;
-	double A;
+	double a;
 	double E1;
 	double E2;
 	double *iterationResults
