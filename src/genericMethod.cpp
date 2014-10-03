@@ -1,12 +1,12 @@
 #include "../lib/imports.h"
 
 
-GenericMethod::GenericMethod(double aproximacaoInicial, double a, double E1, double E2) {
+GenericMethod::GenericMethod(double aproximacaoInicial, double a, double Erro1, double Erro2) {
 
 	this->X1 = aproximacaoInicial;
 	this->a = a;
-	this->E1 = E1;
-	this->E2 = E2;
+	this->Erro1 = Erro1;
+	this->Erro2 = Erro2;
 	this->iterationsNumber = 0;
 	this->allResults = new ListResults();
 }
@@ -18,7 +18,7 @@ virtual void GenericMethod::loop() {
 		X1 = X2;
 		calcularXK();
 		salvaEmLista();
-	}while(testeParadaE2())
+	}while(testeParadaErro2())
 }
 
 double GenericMethod::function1(double x) {
@@ -31,17 +31,17 @@ virtual double GenericMethod::function2(double x) {
 	return -sin(x);
 }
 
-virtual bool GenericMethod::testeParadaE1() {
+virtual bool GenericMethod::testeParadaErro1() {
 	
-	return (abs(function1(X1)) < E1);
+	return (abs(function1(X1)) < Erro1);
 }
 
-virtual bool GenericMethod::testeParadaE2() {
+virtual bool GenericMethod::testeParadaErro2() {
 
-	return (abs(X2 - X1) >= E2);
+	return (abs(X2 - X1) >= Erro2);
 }
 
-virtual void GenericMethod::calcularXK() {
+virtual void GenericMethod::calcularXk() {
 
 	X2 = X1 - function1(X1)/function2(X1);
 }
@@ -99,14 +99,14 @@ double GenericMethod::getA() {
 	return a;
 }
 
-double GenericMethod::getE1() {
+double GenericMethod::getErro1() {
 
-	return E1;
+	return Erro1;
 }
 
-double GenericMethod::getE2() {
+double GenericMethod::getErro2() {
 
-	return E2;
+	return Erro2;
 }
 
 double GenericMethod::getIterationResults() {
@@ -124,14 +124,14 @@ void GenericMethod::setIterationsNumber(int iterationsNumber) {
 	this->iterationsNumber = iterationsNumber;
 }
 
-void GenericMethod::setX1(double X1) {
+void GenericMethod::setX1(double xAtual) {
 
-	this->X1 = X1;
+	this->xAtual = xAtual;
 }
 
-void GenericMethod::setX2(double X2) {
+void GenericMethod::setX2(double xProximo) {
 
-	this->X2 = X2;
+	this->xProximo = xProximo;
 }
 
 void GenericMethod::setA(double A) {
@@ -139,12 +139,12 @@ void GenericMethod::setA(double A) {
 	this->A = A;
 }
 
-void GenericMethod::setE1(double E1) {
+void GenericMethod::setErro1(double Erro1) {
 
-	this->E1 = E1;
+	this->Erro1 = Erro1;
 }
 
-void GenericMethod::setE2(double E2) {
+void GenericMethod::setErro2(double Erro2) {
 
-	this->E2 = E2;
+	this->Erro2 = Erro2;
 }

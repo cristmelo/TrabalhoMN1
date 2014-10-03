@@ -2,13 +2,13 @@ class GenericMethod {
 
 public:
 
-	GenericMethod(double aproximacaoInicial, double a, double E1, double E2);
+	GenericMethod(double aproximacaoInicial, double a, double Erro1, double Erro2);
 
 	double function1(double x);
 	virtual double function2(double x);
-	virtual bool testeParadaE1();
-	virtual bool testeParadaE2();
-	virtual void calcularXK() = 0;
+	virtual bool testeParadaErro1();
+	virtual bool testeParadaErro2();
+	virtual void calcularXk() = 0;
 	virtual void salvaEmLista();
 	virtual void loop();
 	void show();
@@ -18,29 +18,29 @@ public:
 
 	int getIterationsNumber();
 
-	double getX1();
+	double getRaizAtual();
 	double getX2();
 	double getA();
-	double getE1();
-	double getE2();
+	double getErro1();
+	double getErro2();
 	double getIterationResults();
 	ListResults getAllResults();
 
-	void setX1();
+	void setRaizAtual();
 	void setX2();
-	void setIterationsNumber(int iterNumber);
+	void setIterationsNumber(int iterationsNumber);
 	void setA(double a);
-	void setE1(double E1);
-	void setE2(double E2);
+	void setErro1(double Erro1);
+	void setErro2(double Erro2);
 
 private:
 
 	int iterationsNumber;
-	double X1;
-	double X2;
+	double raizAtual;
+	double raizProxima;
 	double a;
-	double E1;
-	double E2;
+	double Erro1;
+	double Erro2;
 	double *iterationResults;
 	ListResults *allResults;
 };
