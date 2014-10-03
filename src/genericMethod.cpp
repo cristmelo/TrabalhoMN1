@@ -3,7 +3,7 @@
 
 GenericMethod::GenericMethod(double aproximacaoInicial, double a, double Erro1, double Erro2) {
 
-	this->X1 = aproximacaoInicial;
+	this->raizAtual = aproximacaoInicial;
 	this->a = a;
 	this->Erro1 = Erro1;
 	this->Erro2 = Erro2;
@@ -13,9 +13,9 @@ GenericMethod::GenericMethod(double aproximacaoInicial, double a, double Erro1, 
 
 virtual void GenericMethod::loop() {
 
-	X2 = X1;
+	raizSeguinte = raizAtual;
 	do{
-		X1 = X2;
+		raizAtual = raizSeguinte;
 		calcularXK();
 		salvaEmLista();
 	}while(testeParadaErro2())
@@ -23,7 +23,7 @@ virtual void GenericMethod::loop() {
 
 double GenericMethod::function1(double x) {
 
-	return cos(x)+(1 - this->a);
+	return cos(x) + (1 - a);
 }
 
 virtual double GenericMethod::function2(double x) {
@@ -33,27 +33,27 @@ virtual double GenericMethod::function2(double x) {
 
 virtual bool GenericMethod::testeParadaErro1() {
 	
-	return (abs(function1(X1)) < Erro1);
+	return (abs(function1(raizAtual)) < Erro1);
 }
 
 virtual bool GenericMethod::testeParadaErro2() {
 
-	return (abs(X2 - X1) >= Erro2);
+	return (abs(raizSeguinte - raizAtual) >= Erro2);
 }
 
-virtual void GenericMethod::calcularXk() {
+virtual void GenericMethod::calcularRaizSeguinte() {
 
-	X2 = X1 - function1(X1)/function2(X1);
+	raizSeguinte = raizAtual - function1(raizAtual)/function2(raizAtual);
 }
 
 virtual void GenericMethod::salvaEmLista() {
 
 	this->iterationResults = new double[5];
 	this->iterationResults[0] = this->iterationsNumber;
-	this->iterationResults[1] = this->X1;
-	this->iterationResults[2] = this->function1(this->X1)
-	this->iterationResults[3] = this->function2(this->X1)
-	this->iterationResults[4] = this->X2;
+	this->iterationResults[1] = this->raizAtual;
+	this->iterationResults[2] = this->function1(this->raizAtual)
+	this->iterationResults[3] = this->function2(this->raizAtual)
+	this->iterationResults[4] = this->raizSeguinte;
 	this->iterationsNumber++;
 	allResults->push(this->iterationResults);
 }
@@ -84,14 +84,14 @@ int GenericMethod::getIterationsNumber() {
 	return iterationsNumber;
 }
 
-double GenericMethod::getX1() {
+double GenericMethod::getRaizAtual() {
 
-	return X1;
+	return raizAtual;
 }
 
-double GenericMethod::getX2() {
+double GenericMethod::getRaizSeguinte() {
 
-	return X2;
+	return raizSeguinte;
 }
 
 double GenericMethod::getA() {
@@ -124,12 +124,12 @@ void GenericMethod::setIterationsNumber(int iterationsNumber) {
 	this->iterationsNumber = iterationsNumber;
 }
 
-void GenericMethod::setX1(double xAtual) {
+void GenericMethod::setRaizAtual(double xAtual) {
 
 	this->xAtual = xAtual;
 }
 
-void GenericMethod::setX2(double xProximo) {
+void GenericMethod::setRaizSeguinte(double xProximo) {
 
 	this->xProximo = xProximo;
 }
