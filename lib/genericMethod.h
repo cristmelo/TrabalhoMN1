@@ -2,7 +2,7 @@ class GenericMethod {
 
 public:
 
-	GenericMethod(double aproximacaoInicial, double a, double Erro1, double Erro2);
+	GenericMethod(double aproximacaoInicialDaRaiz, double a, double Erro1, double Erro2);
 
 	double function(double x);
 	virtual double iterationFunction(double x);

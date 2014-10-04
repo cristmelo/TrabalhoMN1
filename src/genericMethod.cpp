@@ -4,6 +4,7 @@
 GenericMethod::GenericMethod(double aproximacaoInicialdaRaiz, double a, double Erro1, double Erro2) {
 
 	this->aproximacaoAtualDaRaiz = aproximacaoInicialDaRaiz;
+	this->aproximacaoSeguinteDaRaiz = aproximacaoInicialDaRaiz;
 	this->a = a;
 	this->Erro1 = Erro1;
 	this->Erro2 = Erro2;
@@ -13,7 +14,6 @@ GenericMethod::GenericMethod(double aproximacaoInicialdaRaiz, double a, double E
 
 virtual void GenericMethod::loop() {
 
-	aproximacaoSeguinteDaRaiz = aproximacaoAtualDaRaiz;
 	do{
 		aproximacaoAtualDaRaiz = aproximacaoSeguinteDaRaiz;
 		calcularAproximacaoSeguinteDaRaiz();
