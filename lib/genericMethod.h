@@ -4,11 +4,11 @@ public:
 
 	GenericMethod(double aproximacaoInicial, double a, double Erro1, double Erro2);
 
-	double function1(double x);
-	virtual double function2(double x);
+	double function(double x);
+	virtual double iterationFunction(double x);
 	virtual bool testeParadaErro1();
 	virtual bool testeParadaErro2();
-	virtual void calcularRaizSeguinte() = 0;
+	virtual void calcularAproximacaoSeguinteDaRaiz() = 0;
 	virtual void salvaEmLista();
 	virtual void loop();
 	void show();
@@ -17,17 +17,16 @@ public:
 //-----Getters and Setters
 
 	int getIterationsNumber();
-
-	double getRaizAtual();
-	double getRaizSeguinte();
+	double getAproximacaoAtualDaRaiz();
+	double getAproximacaoSeguinteDaRaiz();
 	double getA();
 	double getErro1();
 	double getErro2();
 	double getIterationResults();
 	ListResults getAllResults();
 
-	void setRaizAtual();
-	void setRaizSeguinte();
+	void setAproximacaoAtualDaRaiz(double aproximacaoAtualDaRaiz);
+	void setAproximacaoSeguinteDaRaiz(double aproximacaoSeguinteDaRaiz);
 	void setIterationsNumber(int iterationsNumber);
 	void setA(double a);
 	void setErro1(double Erro1);
@@ -36,8 +35,8 @@ public:
 private:
 
 	int iterationsNumber;
-	double raizAtual;
-	double raizSeguinte;
+	double aproximacaoAtualDaRaiz;
+	double aproximacaoSeguinteDaRaiz;
 	double a;
 	double Erro1;
 	double Erro2;

@@ -1,9 +1,9 @@
 #include "../lib/imports.h"
 
 
-GenericMethod::GenericMethod(double aproximacaoInicial, double a, double Erro1, double Erro2) {
+GenericMethod::GenericMethod(double aproximacaoInicialdaRaiz, double a, double Erro1, double Erro2) {
 
-	this->raizAtual = aproximacaoInicial;
+	this->aproximacaoAtualDaRaiz = aproximacaoInicialDaRaiz;
 	this->a = a;
 	this->Erro1 = Erro1;
 	this->Erro2 = Erro2;
@@ -13,47 +13,47 @@ GenericMethod::GenericMethod(double aproximacaoInicial, double a, double Erro1, 
 
 virtual void GenericMethod::loop() {
 
-	raizSeguinte = raizAtual;
+	aproximacaoSeguinteDaRaiz = aproximacaoAtualDaRaiz;
 	do{
-		raizAtual = raizSeguinte;
-		calcularXK();
+		aproximacaoAtualDaRaiz = aproximacaoSeguinteDaRaiz;
+		calcularAproximacaoSeguinteDaRaiz();
 		salvaEmLista();
 	}while(testeParadaErro2())
 }
 
-double GenericMethod::function1(double x) {
+double GenericMethod::function(double x) {
 
 	return cos(x) + (1 - a);
 }
 
-virtual double GenericMethod::function2(double x) {
+virtual double GenericMethod::iterationFunction(double x) {
 
 	return -sin(x);
 }
 
 virtual bool GenericMethod::testeParadaErro1() {
 	
-	return (abs(function1(raizAtual)) < Erro1);
+	return (abs(function1(aproximacaoAtualDaRaiz)) < Erro1);
 }
 
 virtual bool GenericMethod::testeParadaErro2() {
 
-	return (abs(raizSeguinte - raizAtual) >= Erro2);
+	return (abs(aproximacaoSeguinteDaRaiz - aproximacaoAtualDaRaiz) >= Erro2);
 }
 
-virtual void GenericMethod::calcularRaizSeguinte() {
+virtual void GenericMethod::calcularAproximacaoSeguinteDaRaiz() {
 
-	raizSeguinte = raizAtual - function1(raizAtual)/function2(raizAtual);
+	aproximacaoSeguinteDaRaiz = aproximacaoAtualDaRaiz - function(aproximacaoAtualDaRaiz)/iterationFunction(aproximacaoAtualDaRaiz);
 }
 
 virtual void GenericMethod::salvaEmLista() {
 
 	this->iterationResults = new double[5];
 	this->iterationResults[0] = this->iterationsNumber;
-	this->iterationResults[1] = this->raizAtual;
-	this->iterationResults[2] = this->function1(this->raizAtual)
-	this->iterationResults[3] = this->function2(this->raizAtual)
-	this->iterationResults[4] = this->raizSeguinte;
+	this->iterationResults[1] = this->aproximacaoAtualDaRaiz;
+	this->iterationResults[2] = this->function(this->aproximacaoAtualDaRaiz)
+	this->iterationResults[3] = this->function(this->aproximacaoSeguinteDaRaiz)
+	this->iterationResults[4] = this->aproximacaoSeguinteDaRaiz;
 	this->iterationsNumber++;
 	allResults->push(this->iterationResults);
 }
@@ -78,20 +78,20 @@ void GenericMethod::show() {
 
 //-----Getters and Setters
 
-
+//TODO: Analisar quais desses getters e setters são desnecessários e excluí-los
 int GenericMethod::getIterationsNumber() {
 
 	return iterationsNumber;
 }
 
-double GenericMethod::getRaizAtual() {
+double GenericMethod::getAproximacaoAtualDaRaiz() {
 
-	return raizAtual;
+	return aproximacaoAtualDaRaiz;
 }
 
-double GenericMethod::getRaizSeguinte() {
+double GenericMethod::getAproximacaoSeguinteDaRaiz() {
 
-	return raizSeguinte;
+	return aproximacaoSeguinteDaRaiz;
 }
 
 double GenericMethod::getA() {
@@ -124,19 +124,19 @@ void GenericMethod::setIterationsNumber(int iterationsNumber) {
 	this->iterationsNumber = iterationsNumber;
 }
 
-void GenericMethod::setRaizAtual(double xAtual) {
+void GenericMethod::setAproximacaoAtualDaRaiz(double aproximacaoAtualDaRaiz) {
 
-	this->xAtual = xAtual;
+	this->aproximacaoAtualDaRaiz = aproximacaoAtualDaRaiz;
 }
 
-void GenericMethod::setRaizSeguinte(double xProximo) {
+void GenericMethod::setRaizSeguinte(double aproximacaoSeguinteDaRaiz) {
 
-	this->xProximo = xProximo;
+	this->aproximacaoSeguinteDaRaiz = aproximacaoSeguinteDaRaiz;
 }
 
-void GenericMethod::setA(double A) {
+void GenericMethod::setA(double a) {
 
-	this->A = A;
+	this->a = a;
 }
 
 void GenericMethod::setErro1(double Erro1) {
