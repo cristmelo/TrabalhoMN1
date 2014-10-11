@@ -1,19 +1,18 @@
 #include "../lib/imports.h"
 
 
-GenericMethod::GenericMethod(double aproximacaoInicialDaRaiz, double a, double Erro1, double Erro2) {
+GenericMethod::GenericMethod(double aproximacaoInicialDaRaiz, double a, double erro1, double erro2) {
 
 	aproximacaoAtualDaRaiz = aproximacaoInicialDaRaiz;
-	this->aproximacaoSeguinteDaRaiz = aproximacaoInicialDaRaiz;
 	this->a = a;
-	this->Erro1 = Erro1;
-	this->Erro2 = Erro2;
-	this->iterationsNumber = 0;
-	this->allResults = new ListResults();
+	this->erro1 = erro1;
+	this->erro2 = erro2;
+	iterationsNumber = 0;
+	allResults = new ListResults();
 }
 
 void GenericMethod::loop() {
-
+	aproximacaoSeguinteDaRaiz = aproximacaoAtualDaRaiz;
 	do{
 		aproximacaoAtualDaRaiz = aproximacaoSeguinteDaRaiz;
 		calcularAproximacaoSeguinte();
@@ -33,12 +32,12 @@ double GenericMethod::iterationFunction(double x) {
 
 bool GenericMethod::testeParadaErro1() {
 	
-	return (abs(function(aproximacaoAtualDaRaiz)) < Erro1);
+	return (abs(function(aproximacaoAtualDaRaiz)) < erro1);
 }
 
 bool GenericMethod::testeParadaErro2() {
 
-	return (abs(aproximacaoSeguinteDaRaiz - aproximacaoAtualDaRaiz) >= Erro2);
+	return (abs(aproximacaoSeguinteDaRaiz - aproximacaoAtualDaRaiz) >= erro2);
 }
 
 void GenericMethod::calcularAproximacaoSeguinte() {
@@ -52,8 +51,8 @@ void GenericMethod::salvarEmLista() {
 	iterationResults[0] = iterationsNumber;
 	iterationResults[1] = aproximacaoAtualDaRaiz;
 	iterationResults[2] = function(aproximacaoAtualDaRaiz);
-	iterationResults[3] = function(aproximacaoSeguinteDaRaiz);
-	iterationResults[4] = aproximacaoSeguinteDaRaiz;
+	iterationResults[3] = aproximacaoSeguinteDaRaiz;
+	iterationResults[4] = function(aproximacaoSeguinteDaRaiz);
 	iterationsNumber++;
 	allResults->push(iterationResults);
 }
@@ -61,16 +60,16 @@ void GenericMethod::salvarEmLista() {
 void GenericMethod::show() {
 
 	ListResults list = (*this->allResults);
-	double *interation;
+	double *iteration;
 	while(!list.isEmpty()){
 		// cout << "loop\n";
-		interation = list.pop();
-		cout << "Iteração: " << interation[0];
-		cout << "    X" << interation[0]- 1 << ": " << interation[1];
-		cout << "    X" << interation[0] << ": " << interation[2];
-		cout << "    F(X" << interation[0] - 1<<  "): " << interation[3];
-		cout << "    F(X" << interation[0] << "): " << interation[4];
-		cout << "    X" << interation[0] + 1 << ": " << interation[5] << endl;
+		iteration = list.pop();
+		cout << "Iteração: " << iteration[0] + 1;
+		cout << "    X" << iteration[0] << ": " << iteration[1];
+		cout << "    F(X" << iteration[0] << "): " << iteration[2];
+		cout << "    X" << iteration[0] + 1<<  ": " << iteration[3];
+		cout << "    F(X" << iteration[0] + 1<< "): " << iteration[4];
+		cout << "    X" << iteration[0] + 2<< ": " << iteration[5] << endl;
 	}
 }
 
@@ -100,12 +99,12 @@ double GenericMethod::getA() {
 
 double GenericMethod::getErro1() {
 
-	return Erro1;
+	return erro1;
 }
 
 double GenericMethod::getErro2() {
 
-	return Erro2;
+	return erro2;
 }
 
 double GenericMethod::getIterationResults() {
@@ -128,17 +127,22 @@ void GenericMethod::setAproximacaoAtualDaRaiz(double aproximacaoAtualDaRaiz) {
 	this->aproximacaoAtualDaRaiz = aproximacaoAtualDaRaiz;
 }
 
+void GenericMethod::setAproximacaoSeguinteDaRaiz(double aproximacaoSeguinteDaRaiz) {
+
+	this->aproximacaoSeguinteDaRaiz = aproximacaoSeguinteDaRaiz;
+}
+
 void GenericMethod::setA(double a) {
 
 	this->a = a;
 }
 
-void GenericMethod::setErro1(double Erro1) {
+void GenericMethod::setErro1(double erro1) {
 
-	this->Erro1 = Erro1;
+	this->erro1 = erro1;
 }
 
-void GenericMethod::setErro2(double Erro2) {
+void GenericMethod::setErro2(double erro2) {
 
-	this->Erro2 = Erro2;
+	this->erro2 = erro2;
 }

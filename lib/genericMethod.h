@@ -2,7 +2,7 @@ class GenericMethod {
 
 public:
 
-	GenericMethod(double aproximacaoInicialDaRaiz, double a, double Erro1, double Erro2);
+	GenericMethod(double aproximacaoInicialDaRaiz, double a, double erro1, double erro2);
 
 	double function(double x);
 	virtual double iterationFunction(double x);
@@ -29,8 +29,8 @@ public:
 	void setAproximacaoSeguinteDaRaiz(double aproximacaoSeguinteDaRaiz);
 	void setIterationsNumber(int iterationsNumber);
 	void setA(double a);
-	void setErro1(double Erro1);
-	void setErro2(double Erro2);
+	void setErro1(double erro1);
+	void setErro2(double erro2);
 
 private:
 
@@ -38,8 +38,8 @@ private:
 	double aproximacaoAtualDaRaiz;
 	double aproximacaoSeguinteDaRaiz;
 	double a;
-	double Erro1;
-	double Erro2;
+	double erro1;
+	double erro2;
 	double *iterationResults;
 	ListResults *allResults;
 };

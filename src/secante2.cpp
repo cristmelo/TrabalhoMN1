@@ -1,29 +1,44 @@
 #include "../lib/imports.h"
 
 
-Secante2::Secante2(double aproximacaoInicialDaRaiz, double aproximacaoSeguinteDaRaiz, double a, double Erro1, double Erro2) 
-					:GenericMethod(aproximacaoInicialDaRaiz, a, Erro1, Erro2){
+Secante2::Secante2(double aproximacaoInicialDaRaiz, double aproximacaoSeguinte, double a, double erro1, double erro2) 
+					:GenericMethod(aproximacaoInicialDaRaiz, a, erro1, erro2){
 
-	this->aproximacaoSeguinteDaRaiz = aproximacaoSeguinteDaRaiz;
+	setAproximacaoSeguinteDaRaiz(aproximacaoSeguinte);
 };
 
 double Secante2::iterationFunction(double x)	 {
 
-	return x*function(aproximacaoSeguinteDaRaiz) - aproximacaoSeguinteDaRaiz*function(x);
+	return x*function(getAproximacaoSeguinteDaRaiz()) - getAproximacaoSeguinteDaRaiz()*function(x);
 }
 
 void Secante2::calcularAproximacaoSeguinte() {
+	cout << "aproxAtual: " << getAproximacaoAtualDaRaiz() << endl;
+	cout << "aproxSeguinte: " << getAproximacaoSeguinteDaRaiz() << endl;
+	cout << "a: " << getA() << endl;
+	cout << "erro1: " << getErro1() << endl;
+	cout << "testeParadaErro2: " << testeParadaErro2() << endl << endl;
 
-	aproximacaoSeguinteDaRaiz = aproximacaoAtualDaRaiz 
-			- iterationFunction(aproximacaoAtualDaRaiz)/(function(aproximacaoAtualDaRaiz) - function(aproximacaoSeguinteDaRaiz));
+	double aux = getAproximacaoSeguinteDaRaiz();
+
+	setAproximacaoSeguinteDaRaiz(iterationFunction(getAproximacaoAtualDaRaiz())/(function(getAproximacaoAtualDaRaiz()) - function(getAproximacaoSeguinteDaRaiz())));
+	
+	setAproximacaoAtualDaRaiz(aux);
+
+	cout << "aproxAtual: " << getAproximacaoAtualDaRaiz() << endl;
+	cout << "aproxSeguinte: " << getAproximacaoSeguinteDaRaiz() << endl;
+	cout << "a: " << getA() << endl;
+	cout << "erro1: " << getErro1() << endl;
+	cout << "testeParadaErro2: " << testeParadaErro2() << endl << endl;
+
 }
 
 void Secante2::loop() {
 
-	do{
+	//do{
 		calcularAproximacaoSeguinte();
 		salvarEmLista();
-	}while(testeParadaErro2());
+	//}while(testeParadaErro2());
 }
 
 void Secante2::setMaxInteration(double maxInteration){
