@@ -18,26 +18,12 @@ bool Secante2::testeParadaErro1() {
 }
 
 void Secante2::calcularAproximacaoSeguinte() {
-	cout << "aproxAtual: " << getAproximacaoAtualDaRaiz() << endl;
-	cout << "aproxSeguinte: " << getAproximacaoSeguinteDaRaiz() << endl;
-	cout << "a: " << getA() << endl;
-	cout << "erro1: " << getErro1() << endl;
-	cout << "testeParadaErro1: " << testeParadaErro1() << endl;
-	cout << "testeParadaErro2: " << testeParadaErro2() << endl << endl;
 
 	double aux = getAproximacaoSeguinteDaRaiz();
 
 	setAproximacaoSeguinteDaRaiz(iterationFunction(getAproximacaoAtualDaRaiz())/(function(getAproximacaoSeguinteDaRaiz()) - function(getAproximacaoAtualDaRaiz())));
 	
 	setAproximacaoAtualDaRaiz(aux);
-
-	cout << "aproxAtual: " << getAproximacaoAtualDaRaiz() << endl;
-	cout << "aproxSeguinte: " << getAproximacaoSeguinteDaRaiz() << endl;
-	cout << "a: " << getA() << endl;
-	cout << "erro1: " << getErro1() << endl;
-	cout << "testeParadaErro1: " << testeParadaErro1() << endl;
-	cout << "testeParadaErro2: " << testeParadaErro2() << endl << endl;
-
 }
 
 void Secante2::loop() {
@@ -48,8 +34,6 @@ void Secante2::loop() {
 	
 		calcularAproximacaoSeguinte();
 		salvarEmLista();
-		cout << "testeParadaErro1: " << testeParadaErro1() << endl;
-	cout << "testeParadaErro2: " << testeParadaErro2() << endl << endl;
 	}while(!testeParadaErro1() && !testeParadaErro2());
 }
 

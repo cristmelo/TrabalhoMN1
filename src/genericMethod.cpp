@@ -64,7 +64,7 @@ void GenericMethod::show() {
 	while(!list.isEmpty()){
 		// cout << "loop\n";
 		iteration = list.pop();
-		cout << "Iteração: " << iteration[0] + 1;
+		cout << "Iteração: " << iteration[0];
 		cout << "    X" << iteration[0] << ": " << iteration[1];
 		cout << "    F(X" << iteration[0] << "): " << iteration[2];
 		cout << "    X" << iteration[0] + 1<<  ": " << iteration[3];
