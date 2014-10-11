@@ -8,8 +8,8 @@ public:
 	virtual double iterationFunction(double x);
 	virtual bool testeParadaErro1();
 	virtual bool testeParadaErro2();
-	virtual void calcularAproximacaoSeguinteDaRaiz() = 0;
-	virtual void salvaEmLista();
+	virtual void calcularAproximacaoSeguinte() = 0;
+	virtual void salvarEmLista();
 	virtual void loop();
 	void show();
 

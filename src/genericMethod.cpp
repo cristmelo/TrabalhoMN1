@@ -17,8 +17,8 @@ virtual void GenericMethod::loop() {
 	do{
 		aproximacaoAtualDaRaiz = aproximacaoSeguinteDaRaiz;
 		calcularAproximacaoSeguinteDaRaiz();
-		salvaEmLista();
-	}while(testeParadaErro2())
+		salvarEmLista();
+	}while(testeParadaErro2());
 }
 
 double GenericMethod::function(double x) {
@@ -41,12 +41,12 @@ virtual bool GenericMethod::testeParadaErro2() {
 	return (abs(aproximacaoSeguinteDaRaiz - aproximacaoAtualDaRaiz) >= Erro2);
 }
 
-virtual void GenericMethod::calcularAproximacaoSeguinteDaRaiz() {
+virtual void GenericMethod::calcularAproximacaoSeguinte() {
 
 	aproximacaoSeguinteDaRaiz = aproximacaoAtualDaRaiz - function(aproximacaoAtualDaRaiz)/iterationFunction(aproximacaoAtualDaRaiz);
 }
 
-virtual void GenericMethod::salvaEmLista() {
+virtual void GenericMethod::salvarEmLista() {
 
 	this->iterationResults = new double[5];
 	this->iterationResults[0] = this->iterationsNumber;
