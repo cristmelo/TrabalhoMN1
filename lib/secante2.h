@@ -20,6 +20,7 @@ public:
 	double getMaxInteration();
 	double getValue();
 	double iterationFunction(double x);
+	bool testeParadaErro1();
 	void calcularAproximacaoSeguinte();
 	void loop();
 

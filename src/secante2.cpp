@@ -12,16 +12,22 @@ double Secante2::iterationFunction(double x)	 {
 	return x*function(getAproximacaoSeguinteDaRaiz()) - getAproximacaoSeguinteDaRaiz()*function(x);
 }
 
+bool Secante2::testeParadaErro1() {
+
+	return (abs(function(getAproximacaoSeguinteDaRaiz())) < getErro1());
+}
+
 void Secante2::calcularAproximacaoSeguinte() {
 	cout << "aproxAtual: " << getAproximacaoAtualDaRaiz() << endl;
 	cout << "aproxSeguinte: " << getAproximacaoSeguinteDaRaiz() << endl;
 	cout << "a: " << getA() << endl;
 	cout << "erro1: " << getErro1() << endl;
+	cout << "testeParadaErro1: " << testeParadaErro1() << endl;
 	cout << "testeParadaErro2: " << testeParadaErro2() << endl << endl;
 
 	double aux = getAproximacaoSeguinteDaRaiz();
 
-	setAproximacaoSeguinteDaRaiz(iterationFunction(getAproximacaoAtualDaRaiz())/(function(getAproximacaoAtualDaRaiz()) - function(getAproximacaoSeguinteDaRaiz())));
+	setAproximacaoSeguinteDaRaiz(iterationFunction(getAproximacaoAtualDaRaiz())/(function(getAproximacaoSeguinteDaRaiz()) - function(getAproximacaoAtualDaRaiz())));
 	
 	setAproximacaoAtualDaRaiz(aux);
 
@@ -29,16 +35,22 @@ void Secante2::calcularAproximacaoSeguinte() {
 	cout << "aproxSeguinte: " << getAproximacaoSeguinteDaRaiz() << endl;
 	cout << "a: " << getA() << endl;
 	cout << "erro1: " << getErro1() << endl;
+	cout << "testeParadaErro1: " << testeParadaErro1() << endl;
 	cout << "testeParadaErro2: " << testeParadaErro2() << endl << endl;
 
 }
 
 void Secante2::loop() {
 
-	//do{
+	salvarEmLista();
+
+	do{
+	
 		calcularAproximacaoSeguinte();
 		salvarEmLista();
-	//}while(testeParadaErro2());
+		cout << "testeParadaErro1: " << testeParadaErro1() << endl;
+	cout << "testeParadaErro2: " << testeParadaErro2() << endl << endl;
+	}while(!testeParadaErro1() && !testeParadaErro2());
 }
 
 void Secante2::setMaxInteration(double maxInteration){

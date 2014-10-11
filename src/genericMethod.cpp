@@ -31,13 +31,13 @@ double GenericMethod::iterationFunction(double x) {
 }
 
 bool GenericMethod::testeParadaErro1() {
-	
+
 	return (abs(function(aproximacaoAtualDaRaiz)) < erro1);
 }
 
 bool GenericMethod::testeParadaErro2() {
 
-	return (abs(aproximacaoSeguinteDaRaiz - aproximacaoAtualDaRaiz) >= erro2);
+	return (abs(aproximacaoSeguinteDaRaiz - aproximacaoAtualDaRaiz) < erro2);
 }
 
 void GenericMethod::calcularAproximacaoSeguinte() {
@@ -69,7 +69,7 @@ void GenericMethod::show() {
 		cout << "    F(X" << iteration[0] << "): " << iteration[2];
 		cout << "    X" << iteration[0] + 1<<  ": " << iteration[3];
 		cout << "    F(X" << iteration[0] + 1<< "): " << iteration[4];
-		cout << "    X" << iteration[0] + 2<< ": " << iteration[5] << endl;
+		cout << endl;
 	}
 }
 
