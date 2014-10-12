@@ -30,11 +30,11 @@ void Secante2::loop() {
 
 	salvarEmLista();
 
-	do{
+	while(!testeParadaErro1() && !testeParadaErro2()){
 	
 		calcularAproximacaoSeguinte();
 		salvarEmLista();
-	}while(!testeParadaErro1() && !testeParadaErro2());
+	}
 }
 
 void Secante2::setMaxInteration(double maxInteration){

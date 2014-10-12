@@ -12,8 +12,11 @@ GenericMethod::GenericMethod(double aproximacaoInicialDaRaiz, double a, double e
 }
 
 void GenericMethod::loop() {
+
 	aproximacaoSeguinteDaRaiz = aproximacaoAtualDaRaiz;
+	
 	do{
+
 		aproximacaoAtualDaRaiz = aproximacaoSeguinteDaRaiz;
 		calcularAproximacaoSeguinte();
 		salvarEmLista();
@@ -61,8 +64,9 @@ void GenericMethod::show() {
 
 	ListResults list = (*this->allResults);
 	double *iteration;
+
 	while(!list.isEmpty()){
-		// cout << "loop\n";
+
 		iteration = list.pop();
 		cout << "Iteração: " << iteration[0];
 		cout << "    X" << iteration[0] << ": " << iteration[1];
@@ -82,9 +86,19 @@ int GenericMethod::getIterationsNumber() {
 	return iterationsNumber;
 }
 
+void GenericMethod::setIterationsNumber(int iterationsNumber) {
+
+	this->iterationsNumber = iterationsNumber;
+}
+
 double GenericMethod::getAproximacaoAtualDaRaiz() {
 
 	return aproximacaoAtualDaRaiz;
+}
+
+void GenericMethod::setAproximacaoAtualDaRaiz(double aproximacaoAtualDaRaiz) {
+
+	this->aproximacaoAtualDaRaiz = aproximacaoAtualDaRaiz;
 }
 
 double GenericMethod::getAproximacaoSeguinteDaRaiz() {
@@ -92,9 +106,19 @@ double GenericMethod::getAproximacaoSeguinteDaRaiz() {
 	return aproximacaoSeguinteDaRaiz;
 }
 
+void GenericMethod::setAproximacaoSeguinteDaRaiz(double aproximacaoSeguinteDaRaiz) {
+
+	this->aproximacaoSeguinteDaRaiz = aproximacaoSeguinteDaRaiz;
+}
+
 double GenericMethod::getA() {
 
 	return a;
+}
+
+void GenericMethod::setA(double a) {
+
+	this->a = a;
 }
 
 double GenericMethod::getErro1() {
@@ -102,9 +126,19 @@ double GenericMethod::getErro1() {
 	return erro1;
 }
 
+void GenericMethod::setErro1(double erro1) {
+
+	this->erro1 = erro1;
+}
+
 double GenericMethod::getErro2() {
 
 	return erro2;
+}
+
+void GenericMethod::setErro2(double erro2) {
+
+	this->erro2 = erro2;
 }
 
 double GenericMethod::getIterationResults() {
@@ -115,34 +149,4 @@ double GenericMethod::getIterationResults() {
 ListResults GenericMethod::getAllResults() {
 
 	return *this->allResults;
-}
-
-void GenericMethod::setIterationsNumber(int iterationsNumber) {
-
-	this->iterationsNumber = iterationsNumber;
-}
-
-void GenericMethod::setAproximacaoAtualDaRaiz(double aproximacaoAtualDaRaiz) {
-
-	this->aproximacaoAtualDaRaiz = aproximacaoAtualDaRaiz;
-}
-
-void GenericMethod::setAproximacaoSeguinteDaRaiz(double aproximacaoSeguinteDaRaiz) {
-
-	this->aproximacaoSeguinteDaRaiz = aproximacaoSeguinteDaRaiz;
-}
-
-void GenericMethod::setA(double a) {
-
-	this->a = a;
-}
-
-void GenericMethod::setErro1(double erro1) {
-
-	this->erro1 = erro1;
-}
-
-void GenericMethod::setErro2(double erro2) {
-
-	this->erro2 = erro2;
 }
