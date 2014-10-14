@@ -14,7 +14,7 @@ GenericMethod::GenericMethod(double aproximacaoInicialDaRaiz, double a, double e
 void GenericMethod::loop() {
 
 	aproximacaoSeguinteDaRaiz = aproximacaoAtualDaRaiz;
-	
+
 	do{
 
 		aproximacaoAtualDaRaiz = aproximacaoSeguinteDaRaiz;
@@ -35,12 +35,12 @@ double GenericMethod::iterationFunction(double x) {
 
 bool GenericMethod::testeParadaErro1() {
 
-	return (abs(function(aproximacaoAtualDaRaiz)) < erro1);
+	return (abs(function(aproximacaoSeguinteDaRaiz)-function(aproximacaoAtualDaRaiz)) > erro1);
 }
 
 bool GenericMethod::testeParadaErro2() {
 
-	return (abs(aproximacaoSeguinteDaRaiz - aproximacaoAtualDaRaiz) < erro2);
+	return (abs(aproximacaoSeguinteDaRaiz - aproximacaoAtualDaRaiz) > erro2);
 }
 
 void GenericMethod::calcularAproximacaoSeguinte() {
@@ -68,7 +68,7 @@ void GenericMethod::show() {
 	while(!list.isEmpty()){
 
 		iteration = list.pop();
-		cout << "Iteração: " << iteration[0];
+		cout << "Iteracao: " << iteration[0];
 		cout << "    X" << iteration[0] << ": " << iteration[1];
 		cout << "    F(X" << iteration[0] << "): " << iteration[2];
 		cout << "    X" << iteration[0] + 1<<  ": " << iteration[3];
