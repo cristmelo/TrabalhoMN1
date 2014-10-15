@@ -21,6 +21,7 @@ public:
 	double getValue();
 	double iterationFunction(double x);
 	bool testeParadaErro1();
+	bool testeParadaErro2();
 	void calcularAproximacaoSeguinte();
 	void loop();
 

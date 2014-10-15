@@ -17,13 +17,20 @@ bool Secante2::testeParadaErro1() {
 	return (abs(function(getAproximacaoSeguinteDaRaiz())) < getErro1());
 }
 
+bool Secante2::testeParadaErro2() {
+
+	return (abs(getAproximacaoSeguinteDaRaiz() - getAproximacaoAtualDaRaiz()) < getErro2());
+}
+
 void Secante2::calcularAproximacaoSeguinte() {
 
-	double aux = getAproximacaoSeguinteDaRaiz();
+	double aproxAtualRaiz = getAproximacaoAtualDaRaiz();
+	double aproxSeguinteRaiz = getAproximacaoSeguinteDaRaiz();
 
-	setAproximacaoSeguinteDaRaiz(iterationFunction(getAproximacaoAtualDaRaiz())/(function(getAproximacaoSeguinteDaRaiz()) - function(getAproximacaoAtualDaRaiz())));
+	setAproximacaoSeguinteDaRaiz(iterationFunction(aproxAtualRaiz)
+									/(function(aproxSeguinteRaiz) - function(aproxAtualRaiz)));
 	
-	setAproximacaoAtualDaRaiz(aux);
+	setAproximacaoAtualDaRaiz(aproxSeguinteRaiz);
 }
 
 void Secante2::loop() {

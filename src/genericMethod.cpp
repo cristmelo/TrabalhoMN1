@@ -80,7 +80,6 @@ void GenericMethod::show() {
 
 //-----Getters and Setters
 
-//TODO: Analisar quais desses getters e setters são desnecessários e excluí-los
 int GenericMethod::getIterationsNumber() {
 
 	return iterationsNumber;
