@@ -1,4 +1,9 @@
-#include "mainwindow.h"
+/*Janela principal responsável pela interação com o usuário.
+ * Autores: Caio Viktor;
+ *          Cristiano Melo;
+ *          Lucas Falcão
+*/
+#include "../lib/imports.h"
 #include "ui_mainwindow.h"
 #include <iostream>
 QTableWidget *tableA;

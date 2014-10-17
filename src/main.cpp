@@ -1,16 +1,11 @@
 #include "../lib/imports.h"
+#include <QApplication>
 
-int main(){
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
 
-	Methods *a = new Methods(0, 1.0, 0.0001, 20);
-	
-	//a->print_values();
-
-	a->Bisection();
-
-	a->Regula_Falsi();
-
-
-	return 0;
-
+    return a.exec();
 }
