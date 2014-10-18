@@ -6,6 +6,7 @@ Classe que implementa método do newtonRaphson
 
 class NewtonRaphson : public GenericMethod{
     bool useTest1;
+    double aproximacaoInicialDaRaizAntesDoLoop;
 public:
 	NewtonRaphson(double aproximacaoInicialDaRaiz,double a, double Erro1, double Erro2);
     NewtonRaphson(double aproximacaoInicialDaRaiz,double a, double Erro1, double Erro2,bool useTest1);

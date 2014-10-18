@@ -13,11 +13,16 @@ NewtonRaphson::NewtonRaphson(double aproximacaoInicialDaRaiz, double a, double e
 }
 
 void NewtonRaphson::loop() {
+    this->aproximacaoInicialDaRaizAntesDoLoop=getAproximacaoAtualDaRaiz();
+
 	do{
 		setAproximacaoAtualDaRaiz(getAproximacaoSeguinteDaRaiz());
 		calcularAproximacaoSeguinte();
 		salvarEmLista();
 	}while(testeParadaErro2());
+
+	setAproximacaoAtualDaRaiz(aproximacaoInicialDaRaizAntesDoLoop);
+	setAproximacaoSeguinteDaRaiz(aproximacaoInicialDaRaizAntesDoLoop);
 }
 
 double NewtonRaphson::iterationFunction(double x) {
