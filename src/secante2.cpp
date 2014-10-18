@@ -14,7 +14,8 @@ double Secante2::iterationFunction(double x)	 {
 
 bool Secante2::testeParadaErro1() {
 
-	return (abs(function(getAproximacaoSeguinteDaRaiz())) < getErro1());
+    return (abs(function(getAproximacaoSeguinteDaRaiz())) < getErro1());
+//    return false;
 }
 
 bool Secante2::testeParadaErro2() {

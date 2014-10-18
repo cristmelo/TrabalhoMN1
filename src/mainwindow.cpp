@@ -71,7 +71,7 @@ void MainWindow::on_checkBox_toggled(bool checked)
 void MainWindow::updateTableSec(double valueA,double error1,double error2){
     //delete secante;
 
-    std::cout << valueA <<std::endl << error1<<std::endl<<error2<<std::endl;
+//    std::cout << valueA <<std::endl << error1<<std::endl<<error2<<std::endl;
     QTableWidget *table = ui->tableSec;
     QLabel *labelInteration = ui->valueInterationSec;
     QLabel *labelValuePi = ui->valuePiSec;
@@ -82,8 +82,8 @@ void MainWindow::updateTableSec(double valueA,double error1,double error2){
     ListResults results = secante->getAllResults();
 
     int interations = results.getLength();
-
-    double *interation;
+    double errorFinal = 1;
+    double *interation = 0;
 
     table->setRowCount(interations);
     for (int i = 0; i < interations; ++i) {
@@ -110,10 +110,11 @@ void MainWindow::updateTableSec(double valueA,double error1,double error2){
         table->setItem(i,4,FXb);
         //Error
         QTableWidgetItem *E = new QTableWidgetItem;
-        E->setText(QString::number(interation[2]/interation[1]));
+        errorFinal = (interation[3] - interation[1]);
+        E->setText(QString::number(errorFinal));
         table->setItem(i,5,E);
     }
-    double errorFinal = interation[2]/interation[1];
+
     double valuePi = interation[1];
 
 

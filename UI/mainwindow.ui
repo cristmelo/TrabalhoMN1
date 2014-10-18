@@ -21,7 +21,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="tabConfig">
        <attribute name="title">
@@ -223,7 +223,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Erro Relativo</string>
+            <string>Erro Absoluto</string>
            </property>
           </column>
          </widget>
@@ -372,7 +372,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Erro Relativo</string>
+            <string>Erro Absoluto</string>
            </property>
           </column>
          </widget>
@@ -518,7 +518,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Erro Relativo</string>
+            <string>Erro Absoluto</string>
            </property>
           </column>
          </widget>
@@ -690,7 +690,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Erro Relativo</string>
+            <string>Erro Absoluto</string>
            </property>
           </column>
          </widget>
