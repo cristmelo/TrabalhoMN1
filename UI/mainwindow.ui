@@ -21,7 +21,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabConfig">
        <attribute name="title">
@@ -40,6 +40,9 @@
           <property name="toolTip">
            <string>Margem de Erro 1</string>
           </property>
+          <property name="decimals">
+           <number>10</number>
+          </property>
           <property name="singleStep">
            <double>0.100000000000000</double>
           </property>
@@ -56,6 +59,9 @@
          <widget class="QDoubleSpinBox" name="valueError2">
           <property name="toolTip">
            <string>Margem de Erro 2</string>
+          </property>
+          <property name="decimals">
+           <number>10</number>
           </property>
           <property name="singleStep">
            <double>0.100000000000000</double>
@@ -1087,5 +1093,22 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>valueError1</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>valueError2</receiver>
+   <slot>setValue(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>209</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>408</x>
+     <y>81</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

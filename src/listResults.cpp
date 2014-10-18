@@ -47,3 +47,6 @@ double* ListResults::pop(){
     }
     return node->result;
 }
+int ListResults::getLength(){
+    return this->lenght;
+}

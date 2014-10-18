@@ -10,6 +10,10 @@ GenericMethod::GenericMethod(double aproximacaoInicialDaRaiz, double a, double e
 	iterationsNumber = 0;
 	allResults = new ListResults();
 }
+//GenericMethod::~GenericMethod() {
+//    delete allResults;
+//    //TODO: destrutor da classe
+//}
 
 void GenericMethod::loop() {
 

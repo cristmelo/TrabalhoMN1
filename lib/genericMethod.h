@@ -3,7 +3,7 @@ class GenericMethod {
 public:
 
 	GenericMethod(double aproximacaoInicialDaRaiz, double a, double erro1, double erro2);
-
+    //~GenericMethod();
 	double function(double x);
 	virtual double iterationFunction(double x);
 	virtual bool testeParadaErro1();

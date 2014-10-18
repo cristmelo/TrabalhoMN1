@@ -32,6 +32,7 @@ private slots:
     void on_comboSec_currentIndexChanged(int index);
 
     void on_comboBisectrion_currentIndexChanged(int index);
+    void updateTableSec(double valueA,double error1,double error2);
 
 private:
     Ui::MainWindow *ui;

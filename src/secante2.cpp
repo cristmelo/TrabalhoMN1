@@ -5,7 +5,7 @@ Secante2::Secante2(double aproximacaoInicialDaRaiz, double aproximacaoSeguinte, 
 					:GenericMethod(aproximacaoInicialDaRaiz, a, erro1, erro2){
 
 	setAproximacaoSeguinteDaRaiz(aproximacaoSeguinte);
-};
+}
 
 double Secante2::iterationFunction(double x)	 {
 

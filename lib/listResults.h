@@ -15,4 +15,5 @@ public:
     bool isEmpty();
     void push(double *result);
     double* pop();
+    int getLength();
 };
