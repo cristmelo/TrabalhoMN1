@@ -12,8 +12,8 @@ TARGET = Metodos
 TEMPLATE = app
 
 
-SOURCES += src/mainwindow.cpp \
-           src/main.cpp \
+SOURCES += src/main.cpp \
+           src/mainwindow.cpp \
            src/genericMethod.cpp \
            src/listResults.cpp \
            src/methods.cpp \

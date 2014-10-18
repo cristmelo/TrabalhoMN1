@@ -4,6 +4,7 @@
  *          Lucas Falcão
 */
 #include "../lib/imports.h"
+#include "../lib/mainwindow.h"
 #include "ui_mainwindow.h"
 QTableWidget *tableA;
 int qtdA = 1;
@@ -76,8 +77,10 @@ void MainWindow::updateTableSec(double valueA,double error1,double error2){
     QLabel *labelInteration = ui->valueInterationSec;
     QLabel *labelValuePi = ui->valuePiSec;
     QLabel *labelError = ui->valueErrorSec;
+    QRadioButton *RadioUseTeste1 = ui->setUseTest1;
 
-    secante = new Secante2(3,4,valueA,error1,error2);
+    bool useTest1 = RadioUseTeste1->isChecked();
+    secante = new Secante2(3,4,valueA,error1,error2,useTest1);
     secante->loop();
     ListResults results = secante->getAllResults();
 
@@ -110,7 +113,7 @@ void MainWindow::updateTableSec(double valueA,double error1,double error2){
         table->setItem(i,4,FXb);
         //Error
         QTableWidgetItem *E = new QTableWidgetItem;
-        errorFinal = (interation[3] - interation[1]);
+        errorFinal = abs((interation[3] - interation[1]));
         E->setText(QString::number(errorFinal));
         table->setItem(i,5,E);
     }
@@ -183,4 +186,19 @@ void MainWindow::on_comboBisectrion_currentIndexChanged(int index)
     //QTableView *tableFalse = ui->tableCompareFalse;
     //QTableView *tableNewton = ui->tableCompareNewton;
     //QTableView *tableSec = ui->tableCompareSec;
+}
+//configura se usará teste 1 na secante
+void MainWindow::on_setUseTest1_toggled(bool checked)
+{
+    QComboBox *comboSec = ui->comboSec;
+    int index = comboSec->currentIndex();
+    if(index < qtdA)
+            updateTableSec(valuesA[index],error1,error2);
+    //    else
+    //        //TODO:Comparativo dos valores de A
+}
+//configura se usará teste 1 em newton
+void MainWindow::on_setUseTest1Newton_toggled(bool checked)
+{
+    //veja o da secante
 }

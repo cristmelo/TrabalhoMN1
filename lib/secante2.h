@@ -11,10 +11,12 @@ private:
 	double value, maxInteration;
 	double aproximacaoAtualDaRaiz;
 	double aproximacaoSeguinteDaRaiz;
+    bool useTest1;
 	
 public:
 	
 	Secante2(double aproximacaoInicialDaRaiz, double aproximacaoSeguinteDaRaiz,double a, double Erro1, double Erro2);
+    Secante2(double aproximacaoInicialDaRaiz, double aproximacaoSeguinteDaRaiz,double a, double Erro1, double Erro2,bool UseTest1);
 
 	void setMaxInteration(double x1);
 	double getMaxInteration();

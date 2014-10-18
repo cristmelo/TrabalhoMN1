@@ -34,6 +34,10 @@ private slots:
     void on_comboBisectrion_currentIndexChanged(int index);
     void updateTableSec(double valueA,double error1,double error2);
 
+    void on_setUseTest1_toggled(bool checked);
+
+    void on_setUseTest1Newton_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
 };

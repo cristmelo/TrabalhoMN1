@@ -2,9 +2,15 @@
 
 NewtonRaphson::NewtonRaphson(double aproximacaoInicialDaRaiz, double a, double erro1, double erro2)
 					:GenericMethod(aproximacaoInicialDaRaiz, a, erro1, erro2){
+    this->useTest1 = true;
     setAproximacaoSeguinteDaRaiz(getAproximacaoAtualDaRaiz());
-};
+}
 
+NewtonRaphson::NewtonRaphson(double aproximacaoInicialDaRaiz, double a, double erro1, double erro2,bool UseTest1)
+                    :GenericMethod(aproximacaoInicialDaRaiz, a, erro1, erro2){
+    this->useTest1 = UseTest1;
+    setAproximacaoSeguinteDaRaiz(getAproximacaoAtualDaRaiz());
+}
 
 void NewtonRaphson::loop() {
 	do{
@@ -31,8 +37,10 @@ void NewtonRaphson::calcularAproximacaoSeguinte(){
 }
 
 bool NewtonRaphson::testeParadaErro1() {
-
-	return (abs(function(getAproximacaoSeguinteDaRaiz())-function(getAproximacaoAtualDaRaiz())) > getErro1());
+    if(this->useTest1)
+        return (abs(function(getAproximacaoSeguinteDaRaiz())-function(getAproximacaoAtualDaRaiz())) > getErro1());
+    else
+        return false;
 }
 
 bool NewtonRaphson::testeParadaErro2() {
