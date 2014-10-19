@@ -55,11 +55,11 @@ Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA
             int interations = method->getIterationsNumber();
 
             QTableWidgetItem *itemValueA = new QTableWidgetItem;
-            itemValueA->setText(QString::number(valuesA[i]));
+            itemValueA->setText(QString::number(valuesA[i],'g',10));
             table->setItem(i,0,itemValueA);
 
             QTableWidgetItem *itemValuePi = new QTableWidgetItem;
-            itemValuePi->setText(QString::number(valuePi));
+            itemValuePi->setText(QString::number(valuePi,'g',10));
             table->setItem(i,1,itemValuePi);
 
             QTableWidgetItem *itemValueInterations = new QTableWidgetItem;
@@ -85,12 +85,12 @@ Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA
         }
     }
 
-    betterA->setText(QString::number(best.name));
-    betterValue->setText(QString::number( best.valuePi));
+    betterA->setText(QString::number(best.name,'g',10));
+    betterValue->setText(QString::number( best.valuePi,'g',10));
     qtdBetterInt->setText(QString::number( best.qtdInterations));
 
-    fastA->setText(QString::number(fast.name));
-    fastValue->setText(QString::number( fast.valuePi));
+    fastA->setText(QString::number(fast.name,'g',10));
+    fastValue->setText(QString::number( fast.valuePi,'g',10));
     qtdFastInt->setText(QString::number( fast.qtdInterations));
 
 }

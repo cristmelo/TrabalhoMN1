@@ -459,7 +459,7 @@
       </widget>
       <widget class="QWidget" name="tabNewton">
        <attribute name="title">
-        <string>NewTon-Raphson</string>
+        <string>Newton-Raphson</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
@@ -621,6 +621,19 @@
         <string>Secante</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
+        <item row="3" column="1">
+         <widget class="QLabel" name="valueInterationSec">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label_19">
           <property name="text">
@@ -652,51 +665,6 @@
           <property name="text">
            <string>Número Iterações:</string>
           </property>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="3">
-         <widget class="QTableWidget" name="tableSec">
-          <row>
-           <property name="text">
-            <string>1</string>
-           </property>
-          </row>
-          <column>
-           <property name="text">
-            <string>Valor de Pi</string>
-           </property>
-           <property name="font">
-            <font>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Xa</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>F(Xa)</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Xb</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>F(Xb)</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Erro Absoluto</string>
-           </property>
-          </column>
          </widget>
         </item>
         <item row="3" column="2">
@@ -760,17 +728,49 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="valueInterationSec">
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
+        <item row="1" column="0" colspan="3">
+         <widget class="QTableWidget" name="tableSec">
+          <row>
+           <property name="text">
+            <string>1</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>Valor de Pi</string>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Xa</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>F(Xa)</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Xb</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>F(Xb)</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Erro Absoluto</string>
+           </property>
+          </column>
          </widget>
         </item>
        </layout>

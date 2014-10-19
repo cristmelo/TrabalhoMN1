@@ -57,7 +57,7 @@ void MainWindow::on_checkBox_toggled(bool checked)
         double value = startRange;
         for(int i=0; i < qtdA; i++){
             QTableWidgetItem *cell = tableA->item(i,0);
-            cell->setText(QString::number(value));
+            cell->setText(QString::number(value,'g',10));
             value+=increment;
         }
     }
@@ -93,23 +93,23 @@ void MainWindow::updateTableSec(double valueA,double error1,double error2){
         interation = results.pop();
         //valor Pi
         QTableWidgetItem *Pi = new QTableWidgetItem;
-        Pi->setText(QString::number(interation[1]));
+        Pi->setText(QString::number(interation[1],'g',10));
         table->setItem(i,0,Pi);
         //Xa
         QTableWidgetItem *Xa = new QTableWidgetItem;
-        Xa->setText(QString::number(interation[1]));
+        Xa->setText(QString::number(interation[1],'g',10));
         table->setItem(i,1,Xa);
         //F(Xa)
         QTableWidgetItem *FXa = new QTableWidgetItem;
-        FXa->setText(QString::number(interation[2]));
+        FXa->setText(QString::number(interation[2],'g',10));
         table->setItem(i,2,FXa);
         //Xb
         QTableWidgetItem *Xb = new QTableWidgetItem;
-        Xb->setText(QString::number(interation[3]));
+        Xb->setText(QString::number(interation[3],'g',10));
         table->setItem(i,3,Xb);
         //F(Xb)
         QTableWidgetItem *FXb = new QTableWidgetItem;
-        FXb->setText(QString::number(interation[4]));
+        FXb->setText(QString::number(interation[4],'g',10));
         table->setItem(i,4,FXb);
         //Error
         QTableWidgetItem *E = new QTableWidgetItem;
@@ -118,8 +118,8 @@ void MainWindow::updateTableSec(double valueA,double error1,double error2){
         table->setItem(i,5,E);
     }
 
-    labelInteration->setText(QString::number(interations));
-    labelValuePi->setText(QString::number(secante->getValue()));
+    labelInteration->setText(QString::number(interations,'g',10));
+    labelValuePi->setText(QString::number(secante->getValue(),'g',10));
     labelError->setText(QString::number(errorFinal));
 
 }
@@ -140,7 +140,7 @@ void MainWindow::on_setUp_clicked()
     QComboBox *comboSec = ui->comboSec;
     comboSec->clear();
     for(int i = 0;i< qtdA;i++){
-        comboSec->addItem(QString::number(valuesA[i]),valuesA[i]);
+        comboSec->addItem(QString::number(valuesA[i],'g',10),valuesA[i]);
         //fazer o mesmo para os outros
     }
     comboSec->addItem("Comparativo",qtdA);
