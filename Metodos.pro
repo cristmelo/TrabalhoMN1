@@ -28,7 +28,8 @@ HEADERS  += lib/mainwindow.h \
             lib/methods.h \
             lib/newtonRaphson.h \
             lib/secante2.h \
-            lib/comparation.h
+            lib/comparation.h \
+    lib/comparationStruct.h
 
 FORMS    += UI/mainwindow.ui \
             UI/comparation.ui

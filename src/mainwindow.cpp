@@ -194,8 +194,10 @@ void MainWindow::on_setUseTest1_toggled(bool checked)
     int index = comboSec->currentIndex();
     if(index < qtdA)
             updateTableSec(valuesA[index],error1,error2);
-    //    else
-    //        //TODO:Comparativo dos valores de A
+    else{
+        Comparation *compare = new Comparation(NULL,3,qtdA,valuesA,error1,error2,checked);
+        compare->show();
+    }
 }
 //configura se usará teste 1 em newton
 void MainWindow::on_setUseTest1Newton_toggled(bool checked)
