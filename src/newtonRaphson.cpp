@@ -13,6 +13,7 @@ NewtonRaphson::NewtonRaphson(double aproximacaoInicialDaRaiz, double a, double e
 }
 
 void NewtonRaphson::loop() {
+    this->resetListResult();
     this->aproximacaoInicialDaRaizAntesDoLoop=getAproximacaoAtualDaRaiz();
 
 	do{

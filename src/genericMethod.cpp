@@ -79,6 +79,13 @@ void GenericMethod::show() {
         cout << "    F(X" << iteration[0] + 1<< "): " << iteration[4];
         cout << endl;
 	}
+
+}
+
+void GenericMethod::resetListResult(){
+    delete allResults;
+    this->allResults = new ListResults();
+    iterationsNumber = 0;
 }
 
 

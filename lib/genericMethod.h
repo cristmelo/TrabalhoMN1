@@ -12,7 +12,7 @@ public:
 	virtual void salvarEmLista();
 	virtual void loop();
 	void show();
-
+    void resetListResult();
 
 //-----Getters and Setters
 
