@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->valueError1->setValue(pow(10,-7));
     ui->valueError2->setValue(pow(10,-7));
     tableA = ui->tableValueA;
-
+    on_setUp_clicked();
 }
 
 MainWindow::~MainWindow()
@@ -118,11 +118,8 @@ void MainWindow::updateTableSec(double valueA,double error1,double error2){
         table->setItem(i,5,E);
     }
 
-    double valuePi = interation[1];
-
-
     labelInteration->setText(QString::number(interations));
-    labelValuePi->setText(QString::number(valuePi));
+    labelValuePi->setText(QString::number(secante->getValue()));
     labelError->setText(QString::number(errorFinal));
 
 }
@@ -177,8 +174,11 @@ void MainWindow::on_comboSec_currentIndexChanged(int index)
 {
     if(index < qtdA)
         updateTableSec(valuesA[index],error1,error2);
-//    else
-//        //TODO:Comparativo dos valores de A
+    else{
+        Comparation *compare = new Comparation(NULL,3,qtdA,valuesA,error1,error2,ui->setUseTest1->isChecked());
+        compare->show();
+    }
+
 }
 //escolher A em Comparação
 void MainWindow::on_comboBisectrion_currentIndexChanged(int index)

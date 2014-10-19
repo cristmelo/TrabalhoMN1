@@ -48,6 +48,7 @@ void Secante2::loop() {
 		calcularAproximacaoSeguinte();
 		salvarEmLista();
 	}
+    this->value = this->getAproximacaoAtualDaRaiz();
 }
 
 void Secante2::setMaxInteration(double maxInteration){

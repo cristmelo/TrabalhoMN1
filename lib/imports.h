@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+#include "comparation.h"
 #include "mainwindow.h"
 #include "listResults.h"
 #include "methods.h"
