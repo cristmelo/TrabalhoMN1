@@ -21,7 +21,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="tabConfig">
        <attribute name="title">
@@ -899,7 +899,7 @@
          </widget>
         </item>
         <item row="3" column="2">
-         <widget class="QLabel" name="valuePiCompare">
+         <widget class="QLabel" name="valueBestPiCompare">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -938,7 +938,7 @@
          </widget>
         </item>
         <item row="4" column="2">
-         <widget class="QLabel" name="valueInterationCompare">
+         <widget class="QLabel" name="valueBestInterationCompare">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -964,7 +964,7 @@
          </widget>
         </item>
         <item row="4" column="6">
-         <widget class="QLabel" name="valueInterationCompareFaster">
+         <widget class="QLabel" name="valueFastInterationCompare">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -990,7 +990,7 @@
          </widget>
         </item>
         <item row="5" column="2">
-         <widget class="QLabel" name="valueErrorCompare">
+         <widget class="QLabel" name="valueBestErrorCompare">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -1016,7 +1016,7 @@
          </widget>
         </item>
         <item row="5" column="6">
-         <widget class="QLabel" name="valueErrorCompareFaster">
+         <widget class="QLabel" name="valueFastErrorCompare">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -1042,7 +1042,7 @@
          </widget>
         </item>
         <item row="6" column="2" colspan="2">
-         <widget class="QLabel" name="valueNameBetterPi">
+         <widget class="QLabel" name="valueBestNamePi">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -1068,7 +1068,7 @@
          </widget>
         </item>
         <item row="6" column="6">
-         <widget class="QLabel" name="valueNameFasterPi">
+         <widget class="QLabel" name="valueFastNamePi">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -1088,7 +1088,7 @@
          </widget>
         </item>
         <item row="3" column="6">
-         <widget class="QLabel" name="valuePiCompareFaster">
+         <widget class="QLabel" name="valueFastPiCompare">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -1097,6 +1097,13 @@
           </property>
           <property name="text">
            <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="6">
+         <widget class="QRadioButton" name="radioButton">
+          <property name="text">
+           <string>RadioButton</string>
           </property>
          </widget>
         </item>

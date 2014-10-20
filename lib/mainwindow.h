@@ -38,6 +38,8 @@ private slots:
 
     void on_setUseTest1Newton_toggled(bool checked);
 
+    void updateTableComp(double valueA,double error1,double error2);
+
 private:
     Ui::MainWindow *ui;
 };

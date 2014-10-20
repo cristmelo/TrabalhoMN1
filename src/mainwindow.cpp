@@ -204,3 +204,69 @@ void MainWindow::on_setUseTest1Newton_toggled(bool checked)
 {
     //veja o da secante
 }
+
+
+//Atualiza tabelas comparativo
+void MainWindow::updateTableComp(double valueA,double error1,double error2){
+    //delete secante;
+    //Recupera tabelas
+    QTableWidget *tableSec = ui->tableSec;
+    QTableWidget *tableNewton = ui->tableNewton;
+    QTableWidget *tableFalse = ui->tableFalse;
+
+    //Recupera labels melhor aproximação.
+    QLabel *labelBestPi= ui->valueBestPiCompare;
+    QLabel *labelBestQtdInteretion= ui->valueBestInterationCompare;
+    QLabel *labelBestError = ui->valueBestErrorCompare;
+    QLabel *labelBestName = ui->valueBestNamePi;
+
+    //Recupera labels aproximação mais rápida.
+    QLabel *labelFastPi= ui->valueFastPiCompare;
+    QLabel *labelFastQtdInteretion= ui->valueFastInterationCompare;
+    QLabel *labelFastError = ui->valueFastErrorCompare;
+    QLabel *labelFastName = ui->valueFastNamePi;
+
+//    bool useTest1 = RadioUseTeste1->isChecked();
+//    secante = new Secante2(3,4,valueA,error1,error2,useTest1);
+//    secante->loop();
+//    ListResults results = secante->getAllResults();
+
+//    int interations = results.getLength();
+//    double errorFinal = 1;
+//    double *interation = 0;
+
+//    table->setRowCount(interations);
+//    for (int i = 0; i < interations; ++i) {
+//        interation = results.pop();
+//        //valor Pi
+//        QTableWidgetItem *Pi = new QTableWidgetItem;
+//        Pi->setText(QString::number(interation[1],'g',10));
+//        table->setItem(i,0,Pi);
+//        //Xa
+//        QTableWidgetItem *Xa = new QTableWidgetItem;
+//        Xa->setText(QString::number(interation[1],'g',10));
+//        table->setItem(i,1,Xa);
+//        //F(Xa)
+//        QTableWidgetItem *FXa = new QTableWidgetItem;
+//        FXa->setText(QString::number(interation[2],'g',10));
+//        table->setItem(i,2,FXa);
+//        //Xb
+//        QTableWidgetItem *Xb = new QTableWidgetItem;
+//        Xb->setText(QString::number(interation[3],'g',10));
+//        table->setItem(i,3,Xb);
+//        //F(Xb)
+//        QTableWidgetItem *FXb = new QTableWidgetItem;
+//        FXb->setText(QString::number(interation[4],'g',10));
+//        table->setItem(i,4,FXb);
+//        //Error
+//        QTableWidgetItem *E = new QTableWidgetItem;
+//        errorFinal = abs((interation[3] - interation[1]));
+//        E->setText(QString::number(errorFinal));
+//        table->setItem(i,5,E);
+//    }
+
+//    labelInteration->setText(QString::number(interations,'g',10));
+//    labelValuePi->setText(QString::number(secante->getValue(),'g',10));
+//    labelError->setText(QString::number(errorFinal));
+
+}
