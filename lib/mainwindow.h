@@ -31,15 +31,17 @@ private slots:
     void updateTableNewton(double ValueA,double error1,double error2);
 
     void on_comboSec_currentIndexChanged(int index);
-
-    void on_comboBisectrion_currentIndexChanged(int index);
     void updateTableSec(double valueA,double error1,double error2);
+
+    void on_comboComparation_currentIndexChanged(int index);
 
     void on_setUseTest1_toggled(bool checked);
 
     void on_setUseTest1Newton_toggled(bool checked);
 
     void updateTableComp(double valueA,double error1,double error2);
+
+    void on_setTest1Comparation_toggled(bool checked);
 
 private:
     Ui::MainWindow *ui;

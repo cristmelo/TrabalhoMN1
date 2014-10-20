@@ -210,9 +210,18 @@ void MainWindow::on_setUp_clicked()
     updateTableNewton(valuesA[0],error1,error2);
     QComboBox *comboNewton = ui->comboNewton;
     comboNewton->clear();
+
+
+    //Cria campos para comparação de métodos
+    updateTableComp(valuesA[0], error1, error2);
+    QComboBox *comboComparation = ui->comboComparation;
+    comboComparation->clear();
+
+
     for(int i = 0;i< qtdA;i++){
         comboSec->addItem(QString::number(valuesA[i],'g',10),valuesA[i]);
         comboNewton->addItem(QString::number(valuesA[i],'g',10),valuesA[i]);
+        comboComparation->addItem(QString::number(valuesA[i],'g',10),valuesA[i]);
         //fazer o mesmo para os outros
     }
     comboSec->addItem("Comparativo",qtdA);
@@ -224,13 +233,6 @@ void MainWindow::on_comboBisection_currentIndexChanged(int index)
     //QTableView *table = ui->tableBisection;
 }
 //TODO:
-
-// IMPORTANTE|\\
-
-// Já criei alguns eventos e capiturei as tabelas necessárias
-//Criem as tableas dinamicamente Sigam o exemplo da on_checkBox_toggled(bool checked) no caso de checked pois nele eu fiz isso
-
-// IMPORTANTE|\\
 
 //escolher A em Posição falsa
 void MainWindow::on_comboFalse_currentIndexChanged(int index)
@@ -260,11 +262,9 @@ void MainWindow::on_comboSec_currentIndexChanged(int index)
 
 }
 //escolher A em Comparação
-void MainWindow::on_comboBisectrion_currentIndexChanged(int index)
+void MainWindow::on_comboComparation_currentIndexChanged(int index)
 {
-    //QTableView *tableFalse = ui->tableCompareFalse;
-    //QTableView *tableNewton = ui->tableCompareNewton;
-    //QTableView *tableSec = ui->tableCompareSec;
+    updateTableComp(valuesA[index],error1,error2);
 }
 //configura se usará teste 1 na secante
 void MainWindow::on_setUseTest1_toggled(bool checked)
@@ -296,7 +296,7 @@ void MainWindow::on_setUseTest1Newton_toggled(bool checked)
 void MainWindow::updateTableComp(double valueA,double error1,double error2){
     //delete secante;
     //Recupera tabelas
-    QTableWidget *tableSec = ui->tableSec;
+    QTableWidget *tableSec = ui->tableCompareSec;
     QTableWidget *tableNewton = ui->tableNewton;
     QTableWidget *tableFalse = ui->tableFalse;
 
@@ -312,47 +312,41 @@ void MainWindow::updateTableComp(double valueA,double error1,double error2){
     QLabel *labelFastError = ui->valueFastErrorCompare;
     QLabel *labelFastName = ui->valueFastNamePi;
 
-//    bool useTest1 = RadioUseTeste1->isChecked();
-//    secante = new Secante2(3,4,valueA,error1,error2,useTest1);
-//    secante->loop();
-//    ListResults results = secante->getAllResults();
+    //Teste 1
+    QRadioButton *RadioUseTeste1 = ui->setTest1Comparation;
+    bool useTest1 = RadioUseTeste1->isChecked();
 
-//    int interations = results.getLength();
-//    double errorFinal = 1;
-//    double *interation = 0;
+    //Atualiza tabela da secante
+    secante = new Secante2(3,4,valueA,error1,error2,useTest1);
+    secante->loop();
+    ListResults results = secante->getAllResults();
 
-//    table->setRowCount(interations);
-//    for (int i = 0; i < interations; ++i) {
-//        interation = results.pop();
-//        //valor Pi
-//        QTableWidgetItem *Pi = new QTableWidgetItem;
-//        Pi->setText(QString::number(interation[1],'g',10));
-//        table->setItem(i,0,Pi);
-//        //Xa
-//        QTableWidgetItem *Xa = new QTableWidgetItem;
-//        Xa->setText(QString::number(interation[1],'g',10));
-//        table->setItem(i,1,Xa);
-//        //F(Xa)
-//        QTableWidgetItem *FXa = new QTableWidgetItem;
-//        FXa->setText(QString::number(interation[2],'g',10));
-//        table->setItem(i,2,FXa);
-//        //Xb
-//        QTableWidgetItem *Xb = new QTableWidgetItem;
-//        Xb->setText(QString::number(interation[3],'g',10));
-//        table->setItem(i,3,Xb);
-//        //F(Xb)
-//        QTableWidgetItem *FXb = new QTableWidgetItem;
-//        FXb->setText(QString::number(interation[4],'g',10));
-//        table->setItem(i,4,FXb);
-//        //Error
-//        QTableWidgetItem *E = new QTableWidgetItem;
-//        errorFinal = abs((interation[3] - interation[1]));
-//        E->setText(QString::number(errorFinal));
-//        table->setItem(i,5,E);
-//    }
+    int interations = results.getLength();
+    double errorFinal;
+    double *interation;
 
-//    labelInteration->setText(QString::number(interations,'g',10));
-//    labelValuePi->setText(QString::number(secante->getValue(),'g',10));
-//    labelError->setText(QString::number(errorFinal));
+    tableSec->setRowCount(interations);
+    for (int i = 0; i < interations; ++i) {
+        interation = results.pop();
+        //valor Pi
+        QTableWidgetItem *Pi = new QTableWidgetItem;
+        Pi->setText(QString::number(interation[1],'g',10));
+        tableSec->setItem(i,0,Pi);
 
+        //Error
+        QTableWidgetItem *E = new QTableWidgetItem;
+        errorFinal = abs(secante->function(secante->getValue())) ;
+        E->setText(QString::number(errorFinal));
+        tableSec->setItem(i,1,E);
+    }
+    //Fim atualização da secante
+    //TODO: As demais tabelas e comparar resultados
+
+}
+
+void MainWindow::on_setTest1Comparation_toggled(bool checked)
+{
+    QComboBox *comboComparation = ui->comboComparation;
+    int index = comboComparation->currentIndex();
+    updateTableComp(valuesA[index],error1,error2);
 }

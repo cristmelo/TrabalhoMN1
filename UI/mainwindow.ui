@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>761</width>
+    <width>826</width>
     <height>481</height>
    </rect>
   </property>
@@ -21,7 +21,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="tabConfig">
        <attribute name="title">
@@ -788,7 +788,7 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QComboBox" name="comboBisectrion">
+         <widget class="QComboBox" name="comboComparation">
           <item>
            <property name="text">
             <string>0</string>
@@ -1101,9 +1101,12 @@
          </widget>
         </item>
         <item row="0" column="6">
-         <widget class="QRadioButton" name="radioButton">
+         <widget class="QRadioButton" name="setTest1Comparation">
           <property name="text">
-           <string>RadioButton</string>
+           <string>Usar Teste 1</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -1118,7 +1121,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>761</width>
+     <width>826</width>
      <height>25</height>
     </rect>
    </property>
