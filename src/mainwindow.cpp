@@ -11,6 +11,7 @@ int qtdA = 1;
 
 //Declaração de objetos
 Secante2 *secante;
+NewtonRaphson *newton;
 double *valuesA;
 double error1,error2;
 //Declaração de objetos FIM
@@ -68,7 +69,7 @@ void MainWindow::on_checkBox_toggled(bool checked)
         }
     }
 }
-
+//Atualiza tabela secante
 void MainWindow::updateTableSec(double valueA,double error1,double error2){
     //delete secante;
 
@@ -124,6 +125,70 @@ void MainWindow::updateTableSec(double valueA,double error1,double error2){
 
 }
 
+//Atualiza tabela Newton
+void MainWindow::updateTableNewton(double valueA,double error1,double error2){
+
+    //Tabela que mostrará as iterações do método de newton:
+    QTableWidget *tabelaNewton = ui->tableNewton;
+
+    //Cria ponteiros para os itens logo abaixo da tabela na aba Newton
+    QLabel *numeroIteracoes = ui->valueInterationNewton;
+    QLabel *valorPi = ui->valuePiNewton;
+    QLabel *erroNewton = ui->valueErrorNewton;
+
+    QRadioButton *RadioUseTeste1 = ui->setUseTest1Newton;
+
+    bool useTest1Newton = RadioUseTeste1->isChecked();
+    //Chamada pro método de Newton
+    newton = new NewtonRaphson(3,valueA,error1,error2,useTest1Newton);
+    newton->loop();
+
+    ListResults resultNewton = newton->getAllResults();
+
+    int numeroIteracoesNewton = resultNewton.getLength();
+    double erroFinal = 1;
+    double *iteracao;
+
+    //Define o número de linhas da tabela
+    tabelaNewton->setRowCount(numeroIteracoesNewton);
+
+    //PREENCHIMENTO DAS LINHAS:
+    for (int i = 0; i < numeroIteracoesNewton; i++){
+        iteracao = resultNewton.pop();
+        //Valor de Pi
+        QTableWidgetItem *Pi = new QTableWidgetItem;
+        Pi->setText(QString::number(iteracao[1],'g',10));
+        tabelaNewton->setItem(i,0,Pi);
+        //Xa
+        QTableWidgetItem *Xa = new QTableWidgetItem;
+        Xa->setText(QString::number(iteracao[1],'g',10));
+        tabelaNewton->setItem(i,1,Xa);
+        //F(Xa)
+        QTableWidgetItem *FXa = new QTableWidgetItem;
+        FXa->setText(QString::number(iteracao[2],'g',10));
+        tabelaNewton->setItem(i,2,FXa);
+        //Xb
+        QTableWidgetItem *Xb = new QTableWidgetItem;
+        Xb->setText(QString::number(iteracao[3],'g',10));
+        tabelaNewton->setItem(i,3,Xb);
+        //F(Xb)
+        QTableWidgetItem *FXb = new QTableWidgetItem;
+        FXb->setText(QString::number(iteracao[4],'g',10));
+        tabelaNewton->setItem(i,4,FXb);
+        //Error
+        QTableWidgetItem *E = new QTableWidgetItem;
+        erroFinal = abs((iteracao[3] - iteracao[1]));
+        E->setText(QString::number(erroFinal));
+        tabelaNewton->setItem(i,5,E);
+
+
+    }
+
+    numeroIteracoes->setText(QString::number(numeroIteracoesNewton));
+    valorPi->setText(QString::number(iteracao[1],'g',10));
+    erroNewton->setText(QString::number(erroFinal));
+}
+
 //Apertar Botão salvar
 void MainWindow::on_setUp_clicked()
 {
@@ -136,14 +201,22 @@ void MainWindow::on_setUp_clicked()
         QTableWidgetItem *cell = tableA->item(i,0);
         valuesA[i] = cell->text().replace(",",".").toDouble();
     }
+    //Atualiza e preenche combo da secante
     updateTableSec(valuesA[0],error1,error2);
     QComboBox *comboSec = ui->comboSec;
     comboSec->clear();
+
+    //criar campos para método de Newton
+    updateTableNewton(valuesA[0],error1,error2);
+    QComboBox *comboNewton = ui->comboNewton;
+    comboNewton->clear();
     for(int i = 0;i< qtdA;i++){
         comboSec->addItem(QString::number(valuesA[i],'g',10),valuesA[i]);
+        comboNewton->addItem(QString::number(valuesA[i],'g',10),valuesA[i]);
         //fazer o mesmo para os outros
     }
     comboSec->addItem("Comparativo",qtdA);
+    comboNewton->addItem("Comparativo",qtdA);
 }
 //escolher A em Biseção
 void MainWindow::on_comboBisection_currentIndexChanged(int index)
@@ -167,7 +240,13 @@ void MainWindow::on_comboFalse_currentIndexChanged(int index)
 //escolher A em Newton
 void MainWindow::on_comboNewton_currentIndexChanged(int index)
 {
-    //QTableView *table = ui->tableNewton;
+    if (index <qtdA){
+            updateTableNewton(valuesA[index],error1,error2);
+    }
+    else{
+        Comparation *compare = new Comparation(NULL,2,qtdA,valuesA,error1,error2,ui->setUseTest1Newton->isChecked());
+        compare->show();
+    }
 }
 //escolher A em secante
 void MainWindow::on_comboSec_currentIndexChanged(int index)
@@ -202,7 +281,14 @@ void MainWindow::on_setUseTest1_toggled(bool checked)
 //configura se usará teste 1 em newton
 void MainWindow::on_setUseTest1Newton_toggled(bool checked)
 {
-    //veja o da secante
+    QComboBox *comboNewton = ui->comboNewton;
+    int index = comboNewton->currentIndex();
+    if(index < qtdA)
+            updateTableNewton(valuesA[index],error1,error2);
+    else{
+        Comparation *compare = new Comparation(NULL,2,qtdA,valuesA,error1,error2,checked);
+        compare->show();
+    }
 }
 
 

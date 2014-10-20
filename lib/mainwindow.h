@@ -28,6 +28,7 @@ private slots:
     void on_comboFalse_currentIndexChanged(int index);
 
     void on_comboNewton_currentIndexChanged(int index);
+    void updateTableNewton(double ValueA,double error1,double error2);
 
     void on_comboSec_currentIndexChanged(int index);
 

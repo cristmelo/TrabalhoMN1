@@ -44,8 +44,62 @@ Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA
         case 1:
 
             break;
-        case 2:
+        case 2: //Newton
+            if (1){
+            //SE EU REMOVER ESTE IF, O CÓDIGO NÃO COMPILA, NÃO SE PERGUNTE PORQUE,
+            //APENAS ACEITE, POIS NEM TUDO NA VIDA É PERFEITO.
+            //Edit By Caio: Sábias palavras jovem. Me lembro do sábio que as proferiu e iluminou nossa vida com o conformismo.kkkkkkkkkkkkkkkkkkkk
 
+                NewtonRaphson *metodoNewton = new NewtonRaphson(3,valuesA[i],error1,error2,useTest1);
+                metodoNewton->loop();
+                //Recebe resultado das iterações do método de Newton
+                ListResults resultadoNewton;
+                resultadoNewton = metodoNewton->getAllResults();
+                int numeroIteracoesNewton = resultadoNewton.getLength();
+                //Próximo passo: dar pop() em resultadoNewton até chegar
+                //à última iteração...
+                double *ultimaIteracao;
+                for(int i = 0;i < numeroIteracoesNewton;i++){
+                   ultimaIteracao = resultadoNewton.pop();
+                }
+
+                //Insere o A na tabela de comparações:
+                QTableWidgetItem *itemValorANewton = new QTableWidgetItem;
+                itemValorANewton->setText(QString::number(valuesA[i],'g',10));
+                table->setItem(i,0,itemValorANewton);
+
+                //Para cada A, insere na tabela o valor de Pi achado:
+                QTableWidgetItem *itemValorPi = new QTableWidgetItem;
+                itemValorPi->setText(QString::number(ultimaIteracao[1],'g',10));
+                table->setItem(i,1,itemValorPi);
+
+                //Para cada A, insere na tabela o número de Iterações:
+                QTableWidgetItem *itemNumeroIteracoes = new QTableWidgetItem;
+                itemNumeroIteracoes->setText(QString::number(numeroIteracoesNewton,'g',10));
+                table->setItem(i,2,itemNumeroIteracoes);
+
+                //Para cada A, insere o Erro Relativo
+                //Primeiro: acha o valor no ponto:
+                double erroAbs = abs(metodoNewton->function(ultimaIteracao[1]));
+
+                QTableWidgetItem *itemValorErro = new QTableWidgetItem;
+                itemValorErro->setText(QString::number(erroAbs));
+                table->setItem(i,3,itemValorErro);
+
+
+                if(erroAbs < best.error){
+                     best.error = erroAbs;
+                     best.name = valuesA[i];
+                     best.qtdInterations = numeroIteracoesNewton;
+                     best.valuePi = ultimaIteracao[1];
+                }
+                if(numeroIteracoesNewton < fast.qtdInterations){
+                     fast.error = erroAbs;
+                     fast.name = valuesA[i];
+                     fast.qtdInterations = numeroIteracoesNewton;
+                     fast.valuePi = ultimaIteracao[1];
+                }
+            }
             break;
         case 3:
             Secante2 *method = new Secante2(3,4,valuesA[i],error1,error2,useTest1);
