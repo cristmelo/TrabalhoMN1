@@ -12,6 +12,7 @@ int qtdA = 1;
 
 //Declaração de objetos
 Secante2 *secante;
+Secante2 *secanteComp;
 NewtonRaphson *newton;
 double *valuesA;
 double error1,error2;
@@ -295,7 +296,7 @@ void MainWindow::on_setUseTest1Newton_toggled(bool checked)
 
 //Atualiza tabelas comparativo
 void MainWindow::updateTableComp(double valueA,double error1,double error2){
-    delete secante;
+    delete secanteComp;
     //Recupera tabelas
     QTableWidget *tableSec = ui->tableCompareSec;
     QTableWidget *tableNewton = ui->tableNewton;
@@ -318,9 +319,9 @@ void MainWindow::updateTableComp(double valueA,double error1,double error2){
     bool useTest1 = RadioUseTeste1->isChecked();
 
     //Atualiza tabela da secante
-    secante = new Secante2(3,4,valueA,error1,error2,useTest1);
-    secante->loop();
-    ListResults results = secante->getAllResults();
+    secanteComp = new Secante2(3,4,valueA,error1,error2,useTest1);
+    secanteComp->loop();
+    ListResults results = secanteComp->getAllResults();
 
     int interations = results.getLength();
     double errorFinal;
@@ -354,38 +355,18 @@ void MainWindow::on_setTest1Comparation_toggled(bool checked)
 
 void MainWindow::on_buttonPlotSecante_clicked()
 {
-    QComboBox *comboSec = ui->comboSec;
-    int index = comboSec->currentIndex();
-    if(index < qtdA){
-        delete secante;
-        QRadioButton *RadioUseTeste1 = ui->setUseTest1;
-
-        bool useTest1 = RadioUseTeste1->isChecked();
-        secante = new Secante2(3,4,valuesA[index],error1,error2,useTest1);
-        secante->loop();
-        ListResults results = secante->getAllResults();
-        Plot *plot = new Plot();
-        if(plot->line(results))
-            system("firefox src/saida.html");
-        delete plot;
-    }
+    ListResults results = secante->getAllResults();
+    Plot *plot = new Plot();
+    if(plot->line(results))
+        system("firefox src/saida.html");
+    delete plot;
 }
 
 void MainWindow::on_buttonPlotNewton_clicked()
 {
-    QComboBox *comboNewton = ui->comboNewton;
-    int index = comboNewton->currentIndex();
-    if(index < qtdA){
-        delete secante;
-        QRadioButton *RadioUseTeste1 = ui->setUseTest1Newton;
-
-        bool useTest1 = RadioUseTeste1->isChecked();
-        newton = new NewtonRaphson(3,valuesA[index],error1,error2,useTest1);
-        newton->loop();
-        ListResults results = newton->getAllResults();
-        Plot *plot = new Plot();
-        if(plot->line(results))
-            system("firefox src/saida.html");
-        delete plot;
-    }
+    ListResults results = newton->getAllResults();
+    Plot *plot = new Plot();
+    if(plot->line(results))
+        system("firefox src/saida.html");
+    delete plot;
 }
