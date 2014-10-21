@@ -19,7 +19,8 @@ SOURCES += src/main.cpp \
            src/methods.cpp \
            src/newtonRaphson.cpp \
            src/secante2.cpp \
-           src/comparation.cpp
+           src/comparation.cpp\
+           src/plot.cpp
 
 HEADERS  += lib/mainwindow.h \
             lib/imports.h \
@@ -29,7 +30,8 @@ HEADERS  += lib/mainwindow.h \
             lib/newtonRaphson.h \
             lib/secante2.h \
             lib/comparation.h \
-    lib/comparationStruct.h
+            lib/comparationStruct.h\
+            lib/plot.h
 
 FORMS    += UI/mainwindow.ui \
             UI/comparation.ui

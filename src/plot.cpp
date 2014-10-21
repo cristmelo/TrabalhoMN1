@@ -60,8 +60,10 @@ bool Plot::line(ListResults	listaDeResultados){
 			getline(fin, linha);
 			fout << linha << endl;
 		}
+        return true;
 	}
 	else{
 		cout << "erro" << endl;
+        return false;
 	}
 }

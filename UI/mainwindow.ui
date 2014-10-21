@@ -21,7 +21,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tabConfig">
        <attribute name="title">
@@ -272,19 +272,6 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="1" colspan="2">
-         <widget class="QLabel" name="valueErrorBisection">
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-         </widget>
-        </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label_8">
           <property name="font">
@@ -308,6 +295,26 @@
           </property>
           <property name="text">
            <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="valueErrorBisection">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QPushButton" name="buttonPlotBisec">
+          <property name="text">
+           <string>Plotar</string>
           </property>
          </widget>
         </item>
@@ -426,19 +433,6 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="1" colspan="2">
-         <widget class="QLabel" name="valueErrorFalse">
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-         </widget>
-        </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label_10">
           <property name="font">
@@ -462,6 +456,26 @@
           </property>
           <property name="text">
            <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="valueErrorFalse">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QPushButton" name="buttonPlotFalsi">
+          <property name="text">
+           <string>Plotar</string>
           </property>
          </widget>
         </item>
@@ -572,19 +586,6 @@
           </column>
          </widget>
         </item>
-        <item row="4" column="1" colspan="2">
-         <widget class="QLabel" name="valueErrorNewton">
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="0">
          <widget class="QLabel" name="label_17">
           <property name="font">
@@ -621,6 +622,26 @@
           </property>
           <property name="checked">
            <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="valueErrorNewton">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QPushButton" name="buttonPlotNewton">
+          <property name="text">
+           <string>Plotar</string>
           </property>
          </widget>
         </item>
@@ -712,19 +733,6 @@
           </item>
          </widget>
         </item>
-        <item row="4" column="1" colspan="2">
-         <widget class="QLabel" name="valueErrorSec">
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="1" colspan="2">
          <widget class="QLabel" name="valuePiSec">
           <property name="font">
@@ -781,6 +789,26 @@
             <string>Erro Absoluto</string>
            </property>
           </column>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="valueErrorSec">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QPushButton" name="buttonPlotSecante">
+          <property name="text">
+           <string>Plotar</string>
+          </property>
          </widget>
         </item>
        </layout>

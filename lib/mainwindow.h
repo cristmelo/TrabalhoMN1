@@ -43,6 +43,10 @@ private slots:
 
     void on_setTest1Comparation_toggled(bool checked);
 
+    void on_buttonPlotSecante_clicked();
+
+    void on_buttonPlotNewton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

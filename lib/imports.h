@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <fstream>
 #include <sstream>
+#include <stdlib.h>
 #include "comparationStruct.h"
 #include "comparation.h"
 #include "mainwindow.h"
