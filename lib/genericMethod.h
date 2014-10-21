@@ -1,15 +1,21 @@
+/*
+Autores: Caio Viktor, Geraldo e Matheus Mayron.
+*/
+
 class GenericMethod {
 
 public:
 
-	GenericMethod(double aproximacaoInicialDaRaiz, double a, double erro1, double erro2);
+    GenericMethod(double aproximacaoInicialDaRaiz, double a, double erro1, double erro2,bool useTest1);
     //~GenericMethod();
 	double function(double x);
-	virtual double iterationFunction(double x);
+    virtual double iterationFunction(double x) = 0;
 	virtual bool testeParadaErro1();
 	virtual bool testeParadaErro2();
 	virtual void calcularAproximacaoSeguinte() = 0;
 	virtual void salvarEmLista();
+    virtual void operacoesAntesDoLoop() = 0;
+    virtual void operacoesAposLoop() = 0;
 	virtual void loop();
 	void show();
     void resetListResult();
@@ -23,6 +29,8 @@ public:
 	double getErro1();
 	double getErro2();
 	double getIterationResults();
+    double getValue();
+    int getMaxIteration();
 	ListResults getAllResults();
 
 	void setAproximacaoAtualDaRaiz(double aproximacaoAtualDaRaiz);
@@ -31,10 +39,14 @@ public:
 	void setA(double a);
 	void setErro1(double erro1);
 	void setErro2(double erro2);
+    void setMaxIteration(int maxIteration);
 
 private:
 
 	int iterationsNumber;
+    bool useTest1;
+    double value;
+    int maxIteration;
 	double aproximacaoAtualDaRaiz;
 	double aproximacaoSeguinteDaRaiz;
 	double a;

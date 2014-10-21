@@ -1,29 +1,22 @@
 #include "../lib/imports.h"
 
 NewtonRaphson::NewtonRaphson(double aproximacaoInicialDaRaiz, double a, double erro1, double erro2)
-					:GenericMethod(aproximacaoInicialDaRaiz, a, erro1, erro2){
-    this->useTest1 = true;
-    setAproximacaoSeguinteDaRaiz(getAproximacaoAtualDaRaiz());
+                    :GenericMethod(aproximacaoInicialDaRaiz, a, erro1, erro2,true){
 }
 
 NewtonRaphson::NewtonRaphson(double aproximacaoInicialDaRaiz, double a, double erro1, double erro2,bool UseTest1)
-                    :GenericMethod(aproximacaoInicialDaRaiz, a, erro1, erro2){
-    this->useTest1 = UseTest1;
-    setAproximacaoSeguinteDaRaiz(getAproximacaoAtualDaRaiz());
+                    :GenericMethod(aproximacaoInicialDaRaiz, a, erro1, erro2, UseTest1){
 }
 
-void NewtonRaphson::loop() {
+void NewtonRaphson::operacoesAntesDoLoop(){
     this->resetListResult();
-    this->aproximacaoInicialDaRaizAntesDoLoop=getAproximacaoAtualDaRaiz();
+    setAproximacaoSeguinteDaRaiz(getAproximacaoAtualDaRaiz());
+    this->aproximacaoInicialDaRaiz=getAproximacaoAtualDaRaiz();
+}
 
-	do{
-		setAproximacaoAtualDaRaiz(getAproximacaoSeguinteDaRaiz());
-		calcularAproximacaoSeguinte();
-		salvarEmLista();
-	}while(testeParadaErro2());
-
-	setAproximacaoAtualDaRaiz(aproximacaoInicialDaRaizAntesDoLoop);
-	setAproximacaoSeguinteDaRaiz(aproximacaoInicialDaRaizAntesDoLoop);
+void NewtonRaphson::operacoesAposLoop(){
+    setAproximacaoAtualDaRaiz(aproximacaoInicialDaRaiz);
+    setAproximacaoSeguinteDaRaiz(aproximacaoInicialDaRaiz);
 }
 
 double NewtonRaphson::iterationFunction(double x) {
@@ -34,22 +27,11 @@ double NewtonRaphson::iterationFunction(double x) {
 void NewtonRaphson::calcularAproximacaoSeguinte(){
     double aproximacaoSeguinteDaRaiz;
     double aproximacaoAtualDaRaiz;
-
+    setAproximacaoAtualDaRaiz(getAproximacaoSeguinteDaRaiz());
     aproximacaoAtualDaRaiz=getAproximacaoAtualDaRaiz();
-
     aproximacaoSeguinteDaRaiz = aproximacaoAtualDaRaiz - function(aproximacaoAtualDaRaiz)/iterationFunction(aproximacaoAtualDaRaiz);
-
     setAproximacaoSeguinteDaRaiz(aproximacaoSeguinteDaRaiz);
 }
 
-bool NewtonRaphson::testeParadaErro1() {
-    if(this->useTest1)
-        return (abs(function(getAproximacaoSeguinteDaRaiz())-function(getAproximacaoAtualDaRaiz())) > getErro1());
-    else
-        return false;
-}
 
-bool NewtonRaphson::testeParadaErro2() {
 
-	return (abs(getAproximacaoSeguinteDaRaiz() - getAproximacaoAtualDaRaiz()) > getErro2());
-}

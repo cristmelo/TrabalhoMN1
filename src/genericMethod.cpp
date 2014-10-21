@@ -1,30 +1,26 @@
 #include "../lib/imports.h"
 
 
-GenericMethod::GenericMethod(double aproximacaoInicialDaRaiz, double a, double erro1, double erro2) {
+GenericMethod::GenericMethod(double aproximacaoInicialDaRaiz, double a, double erro1, double erro2, bool useTest1) {
 
 	aproximacaoAtualDaRaiz = aproximacaoInicialDaRaiz;
 	this->a = a;
 	this->erro1 = erro1;
 	this->erro2 = erro2;
+    this->useTest1=useTest1;
 	iterationsNumber = 0;
 	allResults = new ListResults();
 }
-//GenericMethod::~GenericMethod() {
-//    delete allResults;
-//    //TODO: destrutor da classe
-//}
+
 
 void GenericMethod::loop() {
-
-	aproximacaoSeguinteDaRaiz = aproximacaoAtualDaRaiz;
-
-	do{
-
-		aproximacaoAtualDaRaiz = aproximacaoSeguinteDaRaiz;
-		calcularAproximacaoSeguinte();
-		salvarEmLista();
-	}while(testeParadaErro2());
+    operacoesAntesDoLoop();
+    do{
+        calcularAproximacaoSeguinte();
+        salvarEmLista();
+    }while(!testeParadaErro1() && !testeParadaErro2());
+    operacoesAposLoop();
+    this->value = this->getAproximacaoAtualDaRaiz();
 }
 
 double GenericMethod::function(double x) {
@@ -32,24 +28,17 @@ double GenericMethod::function(double x) {
 	return cos(x) + (1 - a);
 }
 
-double GenericMethod::iterationFunction(double x) {
-
-	return -sin(x);
-}
 
 bool GenericMethod::testeParadaErro1() {
-
-	return (abs(function(aproximacaoSeguinteDaRaiz)-function(aproximacaoAtualDaRaiz)) > erro1);
+    if(this->useTest1)
+        return (abs(function(getAproximacaoSeguinteDaRaiz())) < getErro1());
+    else
+        return false;
 }
 
 bool GenericMethod::testeParadaErro2() {
 
-	return (abs(aproximacaoSeguinteDaRaiz - aproximacaoAtualDaRaiz) > erro2);
-}
-
-void GenericMethod::calcularAproximacaoSeguinte() {
-
-	aproximacaoSeguinteDaRaiz = aproximacaoAtualDaRaiz - function(aproximacaoAtualDaRaiz)/iterationFunction(aproximacaoAtualDaRaiz);
+    return (abs(getAproximacaoSeguinteDaRaiz() - getAproximacaoAtualDaRaiz()) < getErro2());
 }
 
 void GenericMethod::salvarEmLista() {
@@ -150,6 +139,19 @@ void GenericMethod::setErro2(double erro2) {
 
 	this->erro2 = erro2;
 }
+
+int GenericMethod::getMaxIteration(){
+    return this->maxIteration;
+}
+
+void GenericMethod::setMaxIteration(int maxIteration){
+    this->maxIteration = maxIteration;
+}
+
+double GenericMethod::getValue(){
+    return this->value;
+}
+
 
 double GenericMethod::getIterationResults() {
 
