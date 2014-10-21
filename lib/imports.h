@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+#include <fstream>
+#include <sstream>
 #include "comparationStruct.h"
 #include "comparation.h"
 #include "mainwindow.h"
@@ -10,4 +12,5 @@
 #include "genericMethod.h"
 #include "secante2.h"
 #include "newtonRaphson.h"
+#include "plot.h"
 using namespace std;
