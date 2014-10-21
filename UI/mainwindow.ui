@@ -203,6 +203,11 @@
           </column>
           <column>
            <property name="text">
+            <string>F(Pi)</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
             <string>Xa</string>
            </property>
           </column>
@@ -348,6 +353,11 @@
              <weight>75</weight>
              <bold>true</bold>
             </font>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>F(Pi)</string>
            </property>
           </column>
           <column>
@@ -1102,6 +1112,9 @@
         </item>
         <item row="0" column="6">
          <widget class="QRadioButton" name="setTest1Comparation">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Usar teste abs(f(Xb )) &amp;lt; ε 1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>Usar Teste 1</string>
           </property>

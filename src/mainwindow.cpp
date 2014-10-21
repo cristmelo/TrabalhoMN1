@@ -335,7 +335,7 @@ void MainWindow::updateTableComp(double valueA,double error1,double error2){
 
         //Error
         QTableWidgetItem *E = new QTableWidgetItem;
-        errorFinal = abs(secante->function(secante->getValue())) ;
+        errorFinal = abs(secante->function(interation[1])) ;
         E->setText(QString::number(errorFinal));
         tableSec->setItem(i,1,E);
     }
