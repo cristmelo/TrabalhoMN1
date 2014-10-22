@@ -5,6 +5,7 @@
 #include <sstream>
 #include <stdlib.h>
 #include "comparationStruct.h"
+#include "dialog.h"
 #include "comparation.h"
 #include "mainwindow.h"
 #include "listResults.h"

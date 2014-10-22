@@ -9,7 +9,7 @@
 QTableWidget *tableA;
 QDialog *janela;
 int qtdA = 1;
-
+bool stateInitial = true;
 //Declaração de objetos
 Secante2 *secante;
 Secante2 *secanteComp;
@@ -195,6 +195,7 @@ void MainWindow::updateTableNewton(double valueA,double error1,double error2){
 void MainWindow::on_setUp_clicked()
 {
     delete secante;
+    delete valuesA;
     error1 = ui->valueError1->text().replace(",",".").toDouble();
     error2 = ui->valueError2->text().replace(",",".").toDouble();
     valuesA = new double[qtdA];
@@ -228,6 +229,12 @@ void MainWindow::on_setUp_clicked()
     }
     comboSec->addItem("Comparativo",qtdA);
     comboNewton->addItem("Comparativo",qtdA);
+
+    if(!stateInitial){
+        Dialog *dialog = new Dialog(NULL,"Confirmado","Configurações confirmadas");
+        dialog->show();
+    }
+    stateInitial = false;
 }
 //escolher A em Biseção
 void MainWindow::on_comboBisection_currentIndexChanged(int index)
@@ -359,6 +366,10 @@ void MainWindow::on_buttonPlotSecante_clicked()
     Plot *plot = new Plot();
     if(plot->line(results))
         system("firefox src/saida.html");
+    else{
+        Dialog *dialog = new Dialog(NULL,"Erro","Erro ao Plotar o gráfico!");
+        dialog->show();
+    }
     delete plot;
 }
 
@@ -368,5 +379,9 @@ void MainWindow::on_buttonPlotNewton_clicked()
     Plot *plot = new Plot();
     if(plot->line(results))
         system("firefox src/saida.html");
+    else{
+        Dialog *dialog = new Dialog(NULL,"Erro","Erro ao Plotar o gráfico!");
+        dialog->show();
+    }
     delete plot;
 }
