@@ -14,6 +14,7 @@ bool stateInitial = true;
 Secante2 *secante;
 Secante2 *secanteComp;
 NewtonRaphson *newton;
+NewtonRaphson *newtonComp;
 double *valuesA;
 double error1,error2;
 //Declaração de objetos FIM
@@ -195,6 +196,7 @@ void MainWindow::updateTableNewton(double valueA,double error1,double error2){
 void MainWindow::on_setUp_clicked()
 {
     delete secante;
+    delete newton;
     delete valuesA;
     error1 = ui->valueError1->text().replace(",",".").toDouble();
     error2 = ui->valueError2->text().replace(",",".").toDouble();
@@ -304,10 +306,11 @@ void MainWindow::on_setUseTest1Newton_toggled(bool checked)
 //Atualiza tabelas comparativo
 void MainWindow::updateTableComp(double valueA,double error1,double error2){
     delete secanteComp;
+    delete newtonComp;
     //Recupera tabelas
     QTableWidget *tableSec = ui->tableCompareSec;
-    QTableWidget *tableNewton = ui->tableNewton;
-    QTableWidget *tableFalse = ui->tableFalse;
+    QTableWidget *tableNewton = ui->tableCompareNewton;
+    QTableWidget *tableFalse = ui->tableCompareFalse;
 
     //Recupera labels melhor aproximação.
     QLabel *labelBestPi= ui->valueBestPiCompare;
@@ -344,12 +347,130 @@ void MainWindow::updateTableComp(double valueA,double error1,double error2){
 
         //Error
         QTableWidgetItem *E = new QTableWidgetItem;
-        errorFinal = abs(secante->function(interation[1])) ;
+        errorFinal = abs(secanteComp->function(interation[1])) ;
         E->setText(QString::number(errorFinal));
         tableSec->setItem(i,1,E);
     }
     //Fim atualização da secante
-    //TODO: As demais tabelas e comparar resultados
+
+    //Atualiza a tabela de Newton:
+        newtonComp = new NewtonRaphson(3,valueA,error1,error2,useTest1);
+        newtonComp->loop();
+        results = newtonComp->getAllResults();
+
+        int numIteracoes = results.getLength();
+        double erroFinal;
+        double *iteracaoAtual;
+
+        tableNewton->setRowCount(numIteracoes);
+
+        for (int i = 0; i < numIteracoes;i++){
+            iteracaoAtual = results.pop();
+
+            //Valor de pi:
+            QTableWidgetItem *Pi = new QTableWidgetItem;
+            Pi->setText(QString::number(iteracaoAtual[1],'g',10));
+            tableNewton->setItem(i,0,Pi);
+            //Colocar o erro de acordo com o Pi encontrado:
+            QTableWidgetItem *Erro = new QTableWidgetItem;
+            erroFinal = abs(newtonComp->function(iteracaoAtual[1]));
+            Erro->setText(QString::number(erroFinal));
+            tableNewton->setItem(i,1,Erro);
+
+        }
+
+        //TODO: Atualização da tabela do Ponto False
+
+
+
+
+        //Comparação de resultados:
+
+        //Primeiro: MAIS RÁPIDO:
+        int numIteracoesNewton = tableNewton->rowCount();
+        int numIteracoesSec = tableSec->rowCount();
+        int numIteracoesFalso = 99999;
+        //Substituir a linha acima por:
+        //int numIteracoesFalso = tableFalse->rowCount();
+        int menorNumIter;
+        QTableWidgetItem *piMaisRapido;
+        QTableWidgetItem *erroMaisRapido; //nome péssimo pra essa variável, eu sei x.x'
+
+        //SE O NEWTON FOR O MAIS RAPIDO:
+        if ((numIteracoesNewton <= numIteracoesSec) && (numIteracoesNewton <= numIteracoesFalso)){
+            piMaisRapido = tableNewton->item((numIteracoesNewton-1),0);
+            erroMaisRapido = tableNewton->item((numIteracoesNewton-1),1);
+            menorNumIter = numIteracoesNewton;
+            labelFastName->setText("Newton-Raphson");
+        }
+        else{//SE SECANTE FOR MAIS RAPIDO:
+            if ((numIteracoesSec <= numIteracoesNewton) && (numIteracoesSec <= numIteracoesFalso)){
+                piMaisRapido = tableSec->item((numIteracoesSec-1),0);
+                erroMaisRapido = tableSec->item((numIteracoesSec-1),1);
+                menorNumIter = numIteracoesSec;
+                labelFastName->setText("Secante");
+
+            }
+            else{//SE PONTO FALSO FOR MAIS RAPIDO
+                piMaisRapido = tableFalse->item((numIteracoesFalso-1),0);
+                erroMaisRapido = tableFalse->item((numIteracoesFalso-1),1);
+                menorNumIter = numIteracoesFalso;
+                labelFastName->setText("Ponto Falso");
+            }
+        }
+
+        //Preenchimento do resto dos campos do método mais rápido:
+        labelFastPi->setText(piMaisRapido->text());
+        labelFastError->setText(erroMaisRapido->text());
+        labelFastQtdInteretion->setText(QString::number(menorNumIter));
+
+        //Agora: MAIS PRECISO
+        //TODO: LEMBRAR DE DESCOMENTAR CERTAS PARTES REFERENTES AO PONTO FALSO
+
+        //Pega o erro de cada método:
+        QTableWidgetItem *erroNewtonTab = tableNewton->item(numIteracoesNewton-1,1);
+        QTableWidgetItem *erroSecTab = tableSec->item(numIteracoesSec-1,1);
+        //QTableWidgetItem *erroFalsoTab = tableFalse->item(numIteracoesFalso-1,1);
+
+        double erroNewton = QString(erroNewtonTab->text()).toDouble();
+        double erroSec = QString(erroSecTab->text()).toDouble();
+        double erroFalso = 99999; //E se quisermos o erro verdadeiro? -brinkz
+        //double erroFalso = QString(erroFalsoTab->text()).toDouble();
+
+        QTableWidgetItem *piMaisPreciso;
+        //QTableWidgetItem *erroMaisPreciso; //nome péssimo de novo D:
+
+        if ((erroNewton <= erroSec) && (erroNewton <= erroFalso)){
+            //SE NEWTON FOR MAIS PRECISO
+            piMaisPreciso=tableNewton->item(numIteracoesNewton-1,0);
+            labelBestName->setText("Newton-Raphson");
+            labelBestError->setText(QString::number(erroNewton));
+            labelBestQtdInteretion->setText(QString::number(numIteracoesNewton));
+
+        }
+        else{//SE SECANTE FOR MAIS PRECISO
+            if ((erroSec <= erroNewton) && (erroSec <= erroFalso)){
+                piMaisPreciso=tableSec->item(numIteracoesSec-1,0);
+                labelBestName->setText("Secante");
+                labelBestError->setText(QString::number(erroSec));
+                labelBestQtdInteretion->setText(QString::number(numIteracoesSec));
+            }
+            else{//SE PONTO FALSO FOR MAIS PRECISO
+                piMaisPreciso=tableFalse->item(numIteracoesFalso-1,0);
+                labelBestName->setText("Ponto Falso");
+                labelBestError->setText(QString::number(erroFalso));
+                labelBestQtdInteretion->setText(QString::number(numIteracoesFalso));
+
+            }
+
+
+
+        }
+
+        //Preenchendo o que não foi feito caso a caso:
+        labelBestPi->setText(piMaisPreciso->text());
+
+
 
 }
 
