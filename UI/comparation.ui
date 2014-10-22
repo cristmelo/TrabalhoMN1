@@ -178,6 +178,13 @@
      </property>
     </widget>
    </item>
+   <item row="0" column="3">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Ploatar</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>

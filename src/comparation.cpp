@@ -1,7 +1,7 @@
 #include "../lib/imports.h"
 #include "../lib/comparation.h"
 #include "ui_comparation.h"
-
+ListResults *listResults;
 Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA,double error1,double error2,bool useTest1) :
     QWidget(parent),
     ui(new Ui::Comparation)
@@ -15,6 +15,8 @@ Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA
     QLabel *fastA = ui->labelNameLessMethod;
     QLabel *qtdBetterInt = ui->labelQTDbetterInterations;
     QLabel *qtdFastInt = ui->labelQTDLessInterations;
+
+    listResults = new ListResults();
     switch(typeMethod){
     case 0:
         nameMethod->setText("Bisseção");
@@ -99,13 +101,22 @@ Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA
                      fast.qtdInterations = numeroIteracoesNewton;
                      fast.valuePi = ultimaIteracao[1];
                 }
+                double *iterationResults = new double[5];
+                iterationResults[0] = i;
+                iterationResults[1] = ultimaIteracao[1];
+                iterationResults[2] = erroAbs;
+                iterationResults[3] = ultimaIteracao[1];//aproximacaoSeguinteDaRaiz;
+                iterationResults[4] = erroAbs;//function(aproximacaoSeguinteDaRaiz);
+                listResults->push(iterationResults);
+
+                delete metodoNewton;
             }
             break;
         case 3:
             Secante2 *method = new Secante2(3,4,valuesA[i],error1,error2,useTest1);
             method->loop();
             double valuePi = method->getValue();
-            double errorAbs = abs(method->function(method->getValue())) ;
+            double errorAbs = abs(method->function(valuePi));
             int interations = method->getIterationsNumber();
 
             QTableWidgetItem *itemValueA = new QTableWidgetItem;
@@ -135,10 +146,19 @@ Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA
                 fast.qtdInterations = interations;
                 fast.valuePi = valuePi;
             }
+
+            double *iterationResults = new double[5];
+            iterationResults[0] = i;
+            iterationResults[1] = valuePi;
+            iterationResults[2] = errorAbs;
+            iterationResults[3] = valuePi;//aproximacaoSeguinteDaRaiz;
+            iterationResults[4] = errorAbs;//function(aproximacaoSeguinteDaRaiz);
+            listResults->push(iterationResults);
+
+            delete method;
             break;
         }
     }
-
     betterA->setText(QString::number(best.name,'g',10));
     betterValue->setText(QString::number( best.valuePi,'g',10));
     qtdBetterInt->setText(QString::number( best.qtdInterations));
@@ -152,4 +172,19 @@ Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA
 Comparation::~Comparation()
 {
     delete ui;
+}
+
+void Comparation::on_pushButton_clicked()
+{
+
+    Plot *plot = new Plot();
+    if(plot->line((*listResults))){
+        if(system("google-chrome src/saida.html"))
+            system("firefox src/saida.html");
+    }
+    else{
+        Dialog *dialog = new Dialog(NULL,"Erro","Erro ao Plotar o gráfico!");
+        dialog->show();
+    }
+    delete plot;
 }

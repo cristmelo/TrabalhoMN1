@@ -32,7 +32,7 @@ public:
     double getValue();
     int getMaxIteration();
 	ListResults getAllResults();
-
+    double getValueAnterior();
 	void setAproximacaoAtualDaRaiz(double aproximacaoAtualDaRaiz);
 	void setAproximacaoSeguinteDaRaiz(double aproximacaoSeguinteDaRaiz);
 	void setIterationsNumber(int iterationsNumber);
@@ -52,6 +52,7 @@ private:
 	double a;
 	double erro1;
 	double erro2;
+    double valueAnterior;
 	double *iterationResults;
 	ListResults *allResults;
 };

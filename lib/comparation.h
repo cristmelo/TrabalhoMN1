@@ -16,6 +16,9 @@ public:
     //typeMethod:0-bisseção 1-posição falsa 2-Newton 3-secante
     ~Comparation();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::Comparation *ui;
 };
