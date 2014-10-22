@@ -10,6 +10,7 @@ GenericMethod::GenericMethod(double aproximacaoInicialDaRaiz, double a, double e
     this->useTest1=useTest1;
 	iterationsNumber = 0;
 	allResults = new ListResults();
+    maxIteration = 500;//10000;
 }
 
 
@@ -18,7 +19,7 @@ void GenericMethod::loop() {
     do{
         calcularAproximacaoSeguinte();
         salvarEmLista();
-    }while(!testeParadaErro1() && !testeParadaErro2());
+    }while(!testeParadaErro1() && !testeParadaErro2() && (iterationsNumber < maxIteration));
     operacoesAposLoop();
     this->value = this->getAproximacaoAtualDaRaiz();
 }

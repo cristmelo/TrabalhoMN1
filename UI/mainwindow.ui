@@ -128,7 +128,14 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QDoubleSpinBox" name="valueStartRange"/>
+            <widget class="QDoubleSpinBox" name="valueStartRange">
+             <property name="minimum">
+              <double>-99990000.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+            </widget>
            </item>
            <item row="0" column="2">
             <widget class="QLabel" name="label_5">
@@ -139,6 +146,12 @@
            </item>
            <item row="0" column="3">
             <widget class="QDoubleSpinBox" name="valueEndRange">
+             <property name="minimum">
+              <double>-99.989999999999995</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
              <property name="value">
               <double>1.000000000000000</double>
              </property>
