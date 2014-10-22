@@ -364,8 +364,10 @@ void MainWindow::on_buttonPlotSecante_clicked()
 {
     ListResults results = secante->getAllResults();
     Plot *plot = new Plot();
-    if(plot->line(results))
-        system("firefox src/saida.html");
+    if(plot->line(results)){
+        if(system("google-chrome src/saida.html"))
+            system("firefox src/saida.html");
+    }
     else{
         Dialog *dialog = new Dialog(NULL,"Erro","Erro ao Plotar o gráfico!");
         dialog->show();
@@ -377,8 +379,10 @@ void MainWindow::on_buttonPlotNewton_clicked()
 {
     ListResults results = newton->getAllResults();
     Plot *plot = new Plot();
-    if(plot->line(results))
-        system("firefox src/saida.html");
+    if(plot->line(results)){
+        if(system("google-chrome src/saida.html"))
+            system("firefox src/saida.html");
+    }
     else{
         Dialog *dialog = new Dialog(NULL,"Erro","Erro ao Plotar o gráfico!");
         dialog->show();
