@@ -15,6 +15,8 @@ Secante2 *secante;
 Secante2 *secanteComp;
 NewtonRaphson *newton;
 NewtonRaphson *newtonComp;
+Methods *falsi;
+Methods *falsiComp;
 double *valuesA;
 double error1,error2;
 //Declaração de objetos FIM
@@ -192,6 +194,74 @@ void MainWindow::updateTableNewton(double valueA,double error1,double error2){
     erroNewton->setText(QString::number(erroFinal));
 }
 
+void MainWindow::updateTableFalse( double valueA, double error1, double error2 ){
+
+    //Tabela que mostrará as iterações do método regula_falsi:
+    QTableWidget *tabelaFalse = ui->tableFalse;
+
+    //Cria ponteiros para os itens logo abaixo da tabela na aba Regula_Falsi
+    QLabel *numeroIteracoes = ui->valueInterationFalse;
+    QLabel *valorPi = ui->valuePiFalse;
+    QLabel *erroFalse = ui->valueErrorFalse;
+
+
+    //Chamada pro método Regula_Falsi
+    falsi = new Methods(3, 4, valueA, error1, 500);
+    falsi->Regula_Falsi();
+    ListResults resultFalse = falsi->getAllResults();
+
+    int numeroIteracoesFalse = resultFalse.getLength();
+    double erroFinal = 1;
+    double *iteracao;
+
+    //Define o número de linhas da tabela
+    tabelaFalse->setRowCount( numeroIteracoesFalse );
+
+    //PREENCHIMENTO DAS LINHAS:
+  for ( int i = 0; i < numeroIteracoesFalse; i++ ){
+      iteracao = resultFalse.pop();
+      cout <<"X: " << iteracao[0] << " Fx = " << iteracao[1] << " a = " << iteracao[2] << " Fa = " << iteracao[3] << " b = " << iteracao[4] << " Fb = " << iteracao[5] << " range = " << iteracao[6] << endl;
+        //Valor de Pi
+        QTableWidgetItem *Pi = new QTableWidgetItem;
+      Pi->setText(QString::number(iteracao[0],'g',10));
+      tabelaFalse->setItem(i,0,Pi);
+
+      //Valor F_Pi
+      QTableWidgetItem *F_Pi = new QTableWidgetItem;
+      F_Pi->setText(QString::number(iteracao[1],'g',10));
+      tabelaFalse->setItem(i,1,F_Pi);
+
+        //Xa
+      QTableWidgetItem *Xa = new QTableWidgetItem;
+      Xa->setText(QString::number(iteracao[2],'g',10));
+      tabelaFalse->setItem(i,2,Xa);
+        //F(Xa)
+      QTableWidgetItem *FXa = new QTableWidgetItem;
+      FXa->setText(QString::number(iteracao[3],'g',10));
+      tabelaFalse->setItem(i,3,FXa);
+        //Xb
+      QTableWidgetItem *Xb = new QTableWidgetItem;
+      Xb->setText(QString::number(iteracao[4],'g',10));
+      tabelaFalse->setItem(i,4,Xb);
+        //F(Xb)
+      QTableWidgetItem *FXb = new QTableWidgetItem;
+      FXb->setText(QString::number(iteracao[5],'g',10));
+      tabelaFalse->setItem(i,5,FXb);
+        //Error
+      QTableWidgetItem *E = new QTableWidgetItem;
+      erroFinal = abs(iteracao[6] );
+      E->setText(QString::number(erroFinal));
+      tabelaFalse->setItem(i,6,E);
+
+
+  }
+  if(numeroIteracoesFalse > 0 ){
+      numeroIteracoes->setText(QString::number(numeroIteracoesFalse));
+      valorPi->setText(QString::number(iteracao[1],'g',10));
+      erroFalse->setText(QString::number(erroFinal));
+    }
+}
+
 //Apertar Botão salvar
 void MainWindow::on_setUp_clicked()
 {
@@ -222,33 +292,39 @@ void MainWindow::on_setUp_clicked()
     QComboBox *comboComparation = ui->comboComparation;
     comboComparation->clear();
 
+    //Cria campos para ponto falsi
+    updateTableFalse(valuesA[0], error1, error2);
+    QComboBox *comboFalse = ui->comboFalse;
+    comboFalse->clear();
 
     for(int i = 0;i< qtdA;i++){
         comboSec->addItem(QString::number(valuesA[i],'g',10),valuesA[i]);
         comboNewton->addItem(QString::number(valuesA[i],'g',10),valuesA[i]);
         comboComparation->addItem(QString::number(valuesA[i],'g',10),valuesA[i]);
+        comboFalse->addItem(QString::number(valuesA[i],'g',10),valuesA[i]);
         //fazer o mesmo para os outros
     }
     comboSec->addItem("Comparativo",qtdA);
     comboNewton->addItem("Comparativo",qtdA);
-
+    comboFalse->addItem("Comparativo",qtdA);
     if(!stateInitial){
         Dialog *dialog = new Dialog(NULL,"Confirmado","Configurações confirmadas");
         dialog->show();
     }
     stateInitial = false;
 }
-//escolher A em Biseção
-void MainWindow::on_comboBisection_currentIndexChanged(int index)
-{
-    //QTableView *table = ui->tableBisection;
-}
-//TODO:
 
 //escolher A em Posição falsa
 void MainWindow::on_comboFalse_currentIndexChanged(int index)
 {
-    //QTableView *table = ui->tableFalse;
+    if (index <qtdA){
+            updateTableFalse(valuesA[index],error1,error2);
+    }
+    else{
+        Comparation *compare = new Comparation(NULL,1,qtdA,valuesA,error1,error2,true);
+        compare->show();
+    }
+
 }
 //escolher A em Newton
 void MainWindow::on_comboNewton_currentIndexChanged(int index)

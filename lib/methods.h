@@ -6,30 +6,35 @@ abstract: this class contains the follow methods: Bissection, Regula_Falsi, Fixe
 Secant and Newton-Raphson; all these methods will be aplyed in a gived function.
 */
 
-
 class Methods{
 
-	float a, b; // Range
+    double a, b; // Range
+    double Fa, Fb, Fx;
+    double value_a; // Values of a from list
+    double error; // Allowed error
+    int maxIter; // Maximum amount iterations
+    int iterationsNumber;
+    double *iterationResults;
+    ListResults *allResults;
 
-	float error; // Allowed error
-	
-	int maxIter; // Maximum amount iterations
+public:
 
-public:	
+    // Constructor
+    Methods(double a, double b, double value_a, double error, int maxIter);
 
-	// Constructor
-	Methods(float a, float b, float error, int maxIter);
+    // Methods
 
-	// Methods
+    void Bisection();
+    void Regula_Falsi();
 
-	void Bisection();
-	void Regula_Falsi();
+    void saveIntoList( double a, double b, double Fa, double Fb, double x, double Fx, double range );
 
-	// Auxiliary function
+    // Auxiliary function
 
-	float Function( float x );
-	void print_values();
-	
-	
+    double Function( double x );
+    void print_values();
+    ListResults getAllResults();
+
+
 
 };
