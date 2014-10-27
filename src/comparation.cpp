@@ -40,10 +40,98 @@ Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA
 
     for(int i = 0; i < qtdA; i++){
         switch(typeMethod){
-        case 0:
+        case 0: //Este case está abandonado, o método da bisseção não existe mais no trabalho :'(
 
             break;
-        case 1:
+        case 1: //Posição Falsa
+            if (1){
+            //Explicação convincente e válida da existência deste if
+            //está presente no próximo case. Aprecie o conhecimento.
+                Methods *metodoFalse = new Methods(3,4,valuesA[i],error1,500);
+                //A VARIAVEL ACIMA FOI APELIDADA CARINHOSAMENTE
+                metodoFalse->Regula_Falsi();
+                //Recebe o resultado das iterações do método da Posição Falsa:
+                ListResults resultadoFalse;
+                resultadoFalse = metodoFalse->getAllResults();
+                int numeroIteracoesFalse = resultadoFalse.getLength();
+
+                if(numeroIteracoesFalse == 0){
+                    //Insere o A:
+                    QTableWidgetItem *itemValorAFalse = new QTableWidgetItem;
+                    itemValorAFalse->setText(QString::number(valuesA[i],'g',10));
+                    table->setItem(i,0,itemValorAFalse);
+
+                    //Para cada A, insere o valor de Pi achado
+                    //Mas aqui é o IF do caso de não achar Pi
+                    QTableWidgetItem *itemValorPi = new QTableWidgetItem;
+                    itemValorPi->setText("-");
+                    table->setItem(i,1,itemValorPi);
+
+                    //Para cada A, insere o número de Iterações
+                    QTableWidgetItem *itemNumIterFalse = new QTableWidgetItem;
+                    itemNumIterFalse->setText("0");
+                    table->setItem(i,2,itemNumIterFalse);
+
+                    //Para cada A, insere o erro.
+                    QTableWidgetItem *itemErroFalse = new QTableWidgetItem;
+                    itemErroFalse->setText("-");
+                    table->setItem(i,3,itemErroFalse);
+                }
+                else{ //CASO ELE ACHE ALGUMA RAIZ
+                    double *ultimaIteracao;
+
+                    for(int k = 0;k < numeroIteracoesFalse;k++){
+                       ultimaIteracao = resultadoFalse.pop();
+                    }
+
+
+                    //Insere o A na tabela de comparações:
+                    QTableWidgetItem *itemValorAFalse = new QTableWidgetItem;
+                    itemValorAFalse->setText(QString::number(valuesA[i],'g',10));
+                    table->setItem(i,0,itemValorAFalse);
+
+                    //Para cada A, insere na tabela o valor de Pi achado:
+                    QTableWidgetItem *itemValorPi = new QTableWidgetItem;
+                    itemValorPi->setText(QString::number(ultimaIteracao[0],'g',10));
+                    table->setItem(i,1,itemValorPi);
+
+                    //Para cada A, insere na tabela o número de Iterações:
+                    QTableWidgetItem *itemNumeroIteracoes = new QTableWidgetItem;
+                    itemNumeroIteracoes->setText(QString::number(numeroIteracoesFalse,'g',10));
+                    table->setItem(i,2,itemNumeroIteracoes);
+
+                    //Para cada A, insere o Erro, que no caso é o Intervalo
+                    QTableWidgetItem *itemValorErro = new QTableWidgetItem;
+                    itemValorErro->setText(QString::number(ultimaIteracao[6]));
+                    table->setItem(i,3,itemValorErro);
+
+                    double erroAbs = ultimaIteracao[6];
+                    if(erroAbs < best.error){
+                         best.error = erroAbs;
+                         best.name = valuesA[i];
+                         best.qtdInterations = numeroIteracoesFalse;
+                         best.valuePi = ultimaIteracao[0];
+                    }
+                    if(numeroIteracoesFalse < fast.qtdInterations){
+                         fast.error = erroAbs;
+                         fast.name = valuesA[i];
+                         fast.qtdInterations = numeroIteracoesFalse;
+                         fast.valuePi = ultimaIteracao[0];
+                    }
+                    double *iterationResults = new double[5];
+
+                    iterationResults[0] = i;
+                    iterationResults[1] = ultimaIteracao[0]; //valor de pi
+                    iterationResults[2] = erroAbs;
+                    iterationResults[3] = ultimaIteracao[0];//aproximacaoSeguinteDaRaiz;
+                    iterationResults[4] = ultimaIteracao[1];//function(aproximacaoSeguinteDaRaiz);
+                    listResults->push(iterationResults);
+
+
+
+
+                }
+            }
 
             break;
         case 2: //Newton
@@ -61,8 +149,10 @@ Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA
                 //Próximo passo: dar pop() em resultadoNewton até chegar
                 //à última iteração...
                 double *ultimaIteracao;
-                for(int i = 0;i < numeroIteracoesNewton;i++){
-                   ultimaIteracao = resultadoNewton.pop();
+                double *penultimaIteracao;
+                for(int k = 0;k < numeroIteracoesNewton;k++){
+                   penultimaIteracao = ultimaIteracao;
+                    ultimaIteracao = resultadoNewton.pop();
                 }
 
                 //Insere o A na tabela de comparações:
@@ -82,7 +172,7 @@ Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA
 
                 //Para cada A, insere o Erro Relativo
                 //Primeiro: acha o valor no ponto:
-                double erroAbs = abs(metodoNewton->function(ultimaIteracao[1]));
+                double erroAbs = abs((penultimaIteracao[3] - penultimaIteracao[1])/penultimaIteracao[3]);
 
                 QTableWidgetItem *itemValorErro = new QTableWidgetItem;
                 itemValorErro->setText(QString::number(erroAbs));
@@ -115,8 +205,15 @@ Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA
         case 3:
             Secante2 *method = new Secante2(3,4,valuesA[i],error1,error2,useTest1);
             method->loop();
+            ListResults interation = method->getAllResults();
+            double *results;
+            for(int j = 0;j < interation.getLength() - 1; j++){
+                results = interation.pop();
+            }
             double valuePi = method->getValue();
-            double errorAbs = abs(method->function(valuePi));
+            //double errorAbs = abs(method->function(valuePi));
+            double errorAbs = abs((results[3] - results[1])/results[3]);
+//            double errorAbs = abs((method->getAproximacaoSeguinteDaRaiz() - method->getAproximacaoAtualDaRaiz())/method->getAproximacaoSeguinteDaRaiz());
             int interations = method->getIterationsNumber();
 
             QTableWidgetItem *itemValueA = new QTableWidgetItem;

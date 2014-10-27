@@ -181,7 +181,7 @@
    <item row="0" column="3">
     <widget class="QPushButton" name="pushButton">
      <property name="text">
-      <string>Ploatar</string>
+      <string>Plotar</string>
      </property>
     </widget>
    </item>
