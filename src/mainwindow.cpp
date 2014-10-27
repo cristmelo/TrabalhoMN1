@@ -496,7 +496,8 @@ void MainWindow::updateTableComp(double valueA,double error1,double error2){
             tableFalse->setItem(i,0,PiFalse);
             //Colocar o erro, que no caso é o range:
             QTableWidgetItem *ErroFalse = new QTableWidgetItem;
-            ErroFalse->setText(QString::number(abs((iteracaoAtual[4] - iteracaoAtual[0])/iteracaoAtual[4]),'g',10));
+            //ErroFalse->setText(QString::number(abs((iteracaoAtual[4] - iteracaoAtual[0])/iteracaoAtual[4]),'g',10));
+            ErroFalse->setText(QString::number(abs(iteracaoAtual[6]/iteracaoAtual[0]),'g',10));
             tableFalse->setItem(i,1,ErroFalse);
 
 

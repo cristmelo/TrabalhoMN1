@@ -16,27 +16,27 @@ bool Plot::line(ListResults	listaDeResultados){
 
 	while(!listaDeResultados.isEmpty()){
 		iteracao = listaDeResultados.pop();
-		strStream << iteracao[1];
-		abscissas += strStream.str() + ", ";
-		strStream.str("");
-		strStream << iteracao[3];
-		abscissas += strStream.str();
-		strStream.str("");
+        strStream << iteracao[1];
+        abscissas += strStream.str();
+        strStream.str("");
+//        strStream << iteracao[3];
+//        abscissas += strStream.str();
+//        strStream.str("");
+
+        if(!listaDeResultados.isEmpty())
+            abscissas += ", ";
+        else
+            abscissas += "]\n";
+
+//        strStream << iteracao[2];
+//        ordenadas += strStream.str() + ", ";
+//        strStream.str("");
+        strStream << iteracao[2];
+        ordenadas += strStream.str();
+        strStream.str("");
 		
-		if(!listaDeResultados.isEmpty())
-			abscissas += ", ";
-		else
-			abscissas += "]\n";
-		
-		strStream << iteracao[2];
-		ordenadas += strStream.str() + ", ";
-		strStream.str("");
-		strStream << iteracao[4];
-		ordenadas += strStream.str();
-		strStream.str("");
-		
-		if(!listaDeResultados.isEmpty())
-			ordenadas += ", ";
+        if(!listaDeResultados.isEmpty())
+            ordenadas += ", ";
 		else
 			ordenadas += "]\n";
 	}

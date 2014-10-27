@@ -76,6 +76,15 @@ Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA
                     QTableWidgetItem *itemErroFalse = new QTableWidgetItem;
                     itemErroFalse->setText("-");
                     table->setItem(i,3,itemErroFalse);
+
+                    double *iterationResults = new double[5];
+
+                    iterationResults[0] = i;
+                    iterationResults[1] = 0; //valor de pi
+                    iterationResults[2] = 0;
+                    iterationResults[3] = 0;//aproximacaoSeguinteDaRaiz;
+                    iterationResults[4] = 0;//function(aproximacaoSeguinteDaRaiz);
+                    listResults->push(iterationResults);
                 }
                 else{ //CASO ELE ACHE ALGUMA RAIZ
                     double *ultimaIteracao;
@@ -124,7 +133,7 @@ Comparation::Comparation(QWidget *parent,int typeMethod,int qtdA,double *valuesA
                     iterationResults[1] = ultimaIteracao[0]; //valor de pi
                     iterationResults[2] = erroAbs;
                     iterationResults[3] = ultimaIteracao[0];//aproximacaoSeguinteDaRaiz;
-                    iterationResults[4] = ultimaIteracao[1];//function(aproximacaoSeguinteDaRaiz);
+                    iterationResults[4] = erroAbs;//function(aproximacaoSeguinteDaRaiz);
                     listResults->push(iterationResults);
 
 
